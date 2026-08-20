@@ -21,7 +21,6 @@ local Config = {
     KillAllFly = false,
     KillAllCooldown = 0.2,
     AuraRange = 20,
-    AntiAfk = false,
 }
 
 local Stats = {
@@ -40,7 +39,6 @@ local isKiller = false
 local killAllConnection = nil
 local lastAttackTime = 0
 local isMinimized = false
-local antiAfkConnection = nil
 
 pcall(function()
     if isfile("antsaken_config.json") then
@@ -54,37 +52,6 @@ pcall(function()
         end
     end
 end)
-
-local function AntiAfkLoop()
-    if antiAfkConnection then
-        antiAfkConnection:Disconnect()
-        antiAfkConnection = nil
-    end
-
-    antiAfkConnection = RunService.Heartbeat:Connect(function()
-        if not Config.AntiAfk then
-            if antiAfkConnection then
-                antiAfkConnection:Disconnect()
-                antiAfkConnection = nil
-            end
-            return
-        end
-
-        if not LocalPlayer.Character then return end
-        local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if not humanoid then return end
-        local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if not rootPart then return end
-
-        local randomX = math.random(-20, 20)
-        local randomZ = math.random(-20, 20)
-        local randomPos = rootPart.Position + Vector3.new(randomX, 0, randomZ)
-        
-        humanoid:MoveTo(randomPos)
-        VirtualUser:CaptureController()
-        VirtualUser:ClickButton2(Vector2.new())
-    end)
-end
 
 local function GetAliveSurvivors()
     local survivors = {}
@@ -533,8 +500,8 @@ local function CreateUI()
     ScreenGui.Parent = LocalPlayer.PlayerGui
 
     local MainFrame = Instance.new("Frame")
-    MainFrame.Size = UDim2.new(0, 300, 0, 580)
-    MainFrame.Position = UDim2.new(0.5, -150, 0.5, -290)
+    MainFrame.Size = UDim2.new(0, 300, 0, 550)
+    MainFrame.Position = UDim2.new(0.5, -150, 0.5, -275)
     MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
     MainFrame.BackgroundTransparency = 0
     MainFrame.BorderSizePixel = 0
@@ -870,23 +837,10 @@ local function CreateUI()
     rangeValue.TextXAlignment = Enum.TextXAlignment.Right
     rangeValue.Parent = rangeFrame
 
-    AddSection("UTILITIES")
-    AddToggle("Anti AFK Bypass", "AntiAfk", function(value)
-        if value then
-            AntiAfkLoop()
-        else
-            if antiAfkConnection then
-                antiAfkConnection:Disconnect()
-                antiAfkConnection = nil
-            end
-        end
-    end, "Moves character randomly every 10 seconds to avoid AFK kick")
-
     AddSection("ACTIONS")
     AddButton("Unload Script", function()
         isFarming = false
         if killAllConnection then killAllConnection:Disconnect(); killAllConnection = nil end
-        if antiAfkConnection then antiAfkConnection:Disconnect(); antiAfkConnection = nil end
         pcall(function() writefile("antsaken_config.json", HttpService:JSONEncode(Config)) end)
         ScreenGui:Destroy()
     end, Color3.fromRGB(32, 18, 18), "Remove script from game")
@@ -913,14 +867,13 @@ local function CreateUI()
             local mins = math.floor(elapsed2 / 60)
             local secs = math.floor(elapsed2 % 60)
             statsLabel.Text = string.format(
-                "Gens: %d/%d | Kills: %d\nTime: %dm %ds\nKiller: %s | AntiAFK: %s\nStatus: %s",
+                "Gens: %d/%d | Kills: %d\nTime: %dm %ds\nKiller: %s | Status: %s",
                 Stats.Fixed,
                 Config.TargetGens,
                 Stats.Kills,
                 mins,
                 secs,
                 isKiller and "YES" or "NO",
-                Config.AntiAfk and "ON" or "OFF",
                 isFarming and "FARMING" or (Config.KillAll and isKiller and "KILLING" or "IDLE")
             )
             task.wait(0.5)
@@ -995,9 +948,9 @@ local function CreateUI()
         task.wait(0.2)
         RestoreBtn.Visible = false
         MainFrame.Visible = true
-        MainFrame.Size = UDim2.new(0, 300, 0, 580)
+        MainFrame.Size = UDim2.new(0, 300, 0, 550)
         TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-            Size = UDim2.new(0, 300, 0, 580)
+            Size = UDim2.new(0, 300, 0, 550)
         }):Play()
     end
 
@@ -1093,12 +1046,5 @@ if Config.KillAll then
     task.spawn(function()
         task.wait(3)
         KillAllLoop()
-    end)
-end
-
-if Config.AntiAfk then
-    task.spawn(function()
-        task.wait(3)
-        AntiAfkLoop()
     end)
 end
