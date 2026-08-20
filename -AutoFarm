@@ -1,1 +1,1062 @@
---[[ v1.0.0 https://wearedevs.net/obfuscator ]] return(function(...)local f={"\122\068\082\110\122\085\120\066\054\078\117\066\048\108\117\121\101\085\089\061";"\083\115\087\106\117\051\118\061";"\048\084\080\111\054\121\068\115\110\053\088\070\057\078\078\079\043\068\066\061";"\117\108\120\102\089\115\066\086\043\068\078\056\117\083\105\104","\055\053\073\047\043\079\048\078\048\103\061\061";"\088\110\049\113\117\051\082\078\055\068\115\111\055\047\115\071";"\101\084\087\104\117\053\120\047\043\085\078\109\117\086\061\061";"\101\072\077\061";"";"\120\084\088\052";"\099\052\069\078\117\119\049\111\099\069\061\061","\083\115\087\121\066\086\061\061";"\065\068\080\083\054\074\104\120\073\056\078\057\089\112\088\047\048\086\061\061","\089\047\116\079\089\074\073\066\110\081\057\061","\083\115\087\080\117\083\073\104\048\084\081\052\101\084\110\061","\068\074\082\072\101\122\107\090\075\118\050\116\078\084\072\080\057\104\080\088\098\118\117\114\110\067\089\048\069\051\086\051\106\090\067\048\065\089\043\052\072\054\072\090\052\108\122\057\066\121\066\050\072\118\087\066\109\049\122\103\108\115\100\054\102\119\085\112\083\121\103\080\118\066\103\086\099\084\067\116\050\054\072\078\097\070\072\082\102\117\050\073\089\052\080\121\067\110\049\099\106\051\081\048\081\076\090\066","\048\084\087\056\048\053\116\111\101\085\043\061","\083\115\087\111\101\085\073\078\122\103\061\061";"\048\084\081\052\101\084\110\061";"\066\121\078\047\117\057\061\061";"\043\085\088\080\101\108\117\078";"\101\047\048\052\089\051\118\056\122\072\110\056\073\047\079\082\066\088\069\061","\117\112\081\080\117\057\061\061";"\048\051\113\086\066\051\120\070";"\117\108\120\115\066\069\061\061";"\043\085\081\109\117\084\087\080","\088\074\078\097\117\051\076\047\117\056\105\078\089\112\077\047","\117\112\115\104\048\084\120\049","\088\121\110\113\065\068\082\109\055\072\110\112\066\056\057\118\073\086\061\061";"\101\084\088\109","\089\079\087\106\065\068\048\073\110\088\078\086\122\088\105\065","\117\083\116\097\101\108\077\061","\088\084\081\080\043\084\088\097\077\079\073\078\048\084\088\074\048\084\088\068\077\057\061\061";"\043\108\073\097\065\051\113\121","\055\084\082\088\054\051\113\070\099\088\117\051\051\110\115\104\099\084\066\061";"\117\085\082\102\101\108\077\061","\043\112\088\047\101\051\088\047\066\083\073\104\066\085\082\078";"\101\051\081\047\065\103\061\061";"\101\072\079\061","\066\112\087\109\066\112\081\047";"\043\084\120\104\101\084\086\061";"\051\078\073\110\051\083\081\067\055\074\104\088\066\051\120\119\089\078\066\061","\048\079\089\115\120\051\120\117\122\079\048\104\048\110\120\102\066\069\061\061","\065\085\111\113\101\112\079\082\054\079\043\061","\048\084\087\109\048\051\115\052\117\083\077\061","\099\069\061\061";"\066\112\104\104\043\069\061\061"}for n,M in ipairs({{19661+-19660,-68308-(-68355)};{-1044951+1044952,776189-776148};{695948-695906,-720066+720113}})do while M[-721509-(-721510)]<M[-956947-(-956949)]do f[M[761152+-761151]],f[M[837747+-837745]],M[799970+-799969],M[422746+-422744]=f[M[375092-375090]],f[M[658116-658115]],M[141501-141500]+(340094-340093),M[-577784+577786]-(1029185-1029184)end end local function n(n)return f[n+(-981880+1023949)]end do local n=string.sub local M=string.len local p={t=-550744+550753,H=969935-969932,j=839830-839786;["\056"]=-866147-(-866198),["\048"]=-312726+312755;["\050"]=536735+-536672,v=-863615+863671;m=56645-56599,b=-737835+737897,L=-366839+366899,h=-152237+152270;Z=-254808-(-254823),i=519827+-519826,["\052"]=757970-757936;c=280385+-280371,["\043"]=535047-535019;P=773717+-773672;l=-691775+691830,Q=687426-687421;d=-532541+532583;s=-194169-(-194222),p=577100+-577046;J=883771-883736,D=-1003296+1003332;u=400932+-400907;a=-366418-(-366468);e=-975017-(-975044);["\047"]=528822+-528770,k=-288844+288903;G=-531798-(-531808),n=-541833+541853,["\053"]=726767+-726760;["\054"]=828655+-828636;F=640278-640235,N=1016617-1016580,M=238682+-238674,B=-40824-(-40848);g=547158-547158;R=996709-996660,U=-971451-(-971489),O=-372330+372334,X=-544350+544371;T=148977-148971;C=-319682+319740,K=497451+-497420;A=-31589-(-31615);["\051"]=-1037376+1037398;w=448050-448048,["\049"]=-343015-(-343055);I=-130217+130234,V=250469-250421,["\055"]=-298098-(-298116),y=-874733+874772,W=163069-163008;z=227146+-227116;E=-634438+634470;o=-371417+371458,["\057"]=39694+-39678;q=-60103-(-60160),Y=2316+-2304;f=520238-520191;r=-453643-(-453654),x=165165-165152;S=477338+-477315}local m=string.char local z=math.floor local F=table.insert local q=type local o=f local c=table.concat for f=-15353+15354,#o,152269+-152268 do local B=o[f]if q(B)=="\115\116\114\105\110\103"then local q=M(B)local T={}local j=181684+-181683 local A=42532-42532 local Z=-920387-(-920387)while j<=q do local f=n(B,j,j)local M=p[f]if M then A=A+M*(198721+-198657)^((-953302+953305)-Z)Z=Z+(-255403+255404)if Z==637759+-637755 then Z=-587763-(-587763)local f=z(A/(-820822-(-886358)))local n=z((A%(-906562-(-972098)))/(311362-311106))local M=A%(41680+-41424)F(T,m(f,n,M))A=713668-713668 end elseif f=="\061"then F(T,m(z(A/(713569-648033))))if j>=q or n(B,j+(167186+-167185),j+(763375+-763374))~="\061"then F(T,m(z((A%(122995-57459))/(-897357+897613))))end break end j=j+(156323-156322)end o[f]=c(T)end end end return(function(f,p,m,z,F,q,o,M,T,Q,P,j,c,R,Z,A,G,H,B,N,a)N,j,R,a,H,T,B,G,P,M,A,c,Z,Q=function(f,n)local p=A(n)local m=function(...)return M(f,{...},n,p)end return m end,536068+-536068,function(f,n)local p=A(n)local m=function(m,z)return M(f,{m;z},n,p)end return m end,function(f,n)local p=A(n)local m=function(m,z,F,q,o)return M(f,{m,z,F,q;o},n,p)end return m end,function(f,n)local p=A(n)local m=function(m,z,F)return M(f,{m,z,F},n,p)end return m end,function()j=(146308-146307)+j B[j]=-358144-(-358145)return j end,{},function(f,n)local p=A(n)local m=function()return M(f,{},n,p)end return m end,function(f)B[f]=B[f]-(-303066-(-303067))if 215668-215668==B[f]then B[f],c[f]=nil,nil end end,function(M,m,z,F)local S,X,A,V,y,g,j,t,Z,U,W,r,Y,k,l,x,E,u,O,K,s,b,d,C,o,N,h,J,L,I,w,D,B,e while M do if M<-908712+8284175 then if M<347257+4071430 then if M<2711869-638059 then if M<507888-(-373017)then if M<924520-130120 then if M<167852+464144 then if M<-979982+1126267 then M=R(-973976+2089157,{Z})b={M()}o={p(b)}M=f[n(-604259+562197)]else M=c[u]l=-481128+481129 t=-424256-(-424262)b=M(l,t)M=n(304905+-346972)t=n(-56170+14103)f[M]=b l=f[t]t=-345074+345076 M=l>t M=M and 8518186-(-300756)or 523618+7118760 end else D=c[j]M=D and-84122-(-960667)or-696114+4443875 K=D end else if M<331823+510839 then A=c[z[-476646-(-476655)]]M={}j=44072+-44071 B=M Z=A A=995228-995227 N=A A=-476968+476968 L=N<A A=j-N M=4666901-(-450264)else h=-35211+35212 M=-936335+4684096 D=y[h]K=D end end else if M<-1029029+2213974 then if M<-630227+1628015 then M=9455020-495392 b=X==e Y=b else M=16218144-(-110722)end else if M<-1037084+2517188 then M=true c[z[43054+-43053]]=M M=f[n(780890-822934)]o={}else r=not t Y=Y+l o=Y<=b o=r and o r=Y>=b r=t and r o=r or o r=6009154-382540 M=o and r o=7786628-549604 M=M or o end end end else if M<659961+2881699 then if M<-272541+3128463 then if M<2575059-(-111467)then if M<1568392-(-743923)then B=c[z[-563788-(-563789)]]o=#B B=-677636-(-677636)M=o==B M=M and 75746+4271068 or 886948+13028884 else o={}M=f[n(484266-526306)]end else M=-368188+3647036 j=c[z[997801+-997798]]A=291716-291585 B=j*A j=-351207+351464 o=B%j c[z[-835265+835268]]=o end else if M<688005+2407492 then g=#O t=-96184-(-96184)V=g==t M=V and-830700+14149722 or 4418340-169076 else A=-20901-(-20902)j=c[z[-492884-(-492887)]]B=j~=A M=B and-333158+14397450 or 3389142-643697 end end else if M<3074577-(-971404)then if M<398971+3476070 then S=-507908-(-507909)c[j]=K I=c[s]U=I+S h=y[U]D=X+h h=-944203+944459 M=D%h U=c[C]X=M M=9299160-323933 h=e+U U=-537585-(-537841)D=h%U e=D else M=true M=M and 13225806-877752 or 848545-820033 end else if M<3414537-(-854147)then t=#O g=282331+-282330 V=Z(g,t)C=786395+-786394 g=L(O,V)V=nil t=c[e]x=g-C M=3065326-(-12380)r=u(x)t[g]=r g=nil else A=-866325+866574 j=c[z[16417+-16415]]B=j*A j=450718+26215074844431 o=B+j j=-278531-(-278532)B=-748347+35184372837179 M=o%B c[z[862618-862616]]=M B=c[z[-452524-(-452527)]]o=B~=j M=2078876-(-666569)end end end end else if M<-125833+6006876 then if M<5475743-250499 then if M<4135510-(-982317)then if M<-44243+5133984 then if M<-503590+5346899 then k=P(k)O=nil O={}u=P(u)k=n(-825026-(-782985))L=nil u=n(-1007139+965102)j=P(j)V=nil N=P(N)d=P(d)A=P(A)Z=P(Z)J=nil g=P(g)J=n(-597223-(-555167))L=n(-151968+109931)j=nil g=-683549-(-683805)A=nil e=nil N=f[L]d=T()L=n(538602+-580641)Z=N[L]e=T()N=T()c[N]=Z X=nil L=f[u]u=n(-503538-(-461489))Z=L[u]u=f[J]J=n(-934799-(-892745))t=g L=u[J]J=f[k]X={}k=n(729482+-771510)u=J[k]J=53993-53993 k=T()c[k]=J V=-916194+916195 J=259164-259162 M=10431357-237650 g=-269502+269503 c[d]=J J={}c[e]=X r=g g=-598088-(-598088)X=620458+-620458 x=r<g g=V-r else I=258734-258732 U=y[I]I=c[W]h=U==I K=h M=-613801+7623015 end else A=A+N u=not L j=A<=Z j=u and j u=A>=Z u=L and u j=u or j u=1011900+11225371 M=j and u j=6032420-312092 M=M or j end else if M<4843577-(-292828)then j=n(-154527-(-112462))o=4289533-(-11001)A=8073518-139686 B=j^A M=o-B B=M o=n(933874-975905)M=o/B o={M}M=f[n(545358-587404)]else M=580111+11087266 end end else if M<6509076-845001 then if M<5718731-194664 then O=n(176585-218641)M=8593886-363130 e=f[O]O=n(-73275+31224)X=e[O]k=X else r=T()c[r]=Y S=408604-408604 x=n(190231-232268)W=-1032726+1032727 o=f[x]x=n(749073+-791122)M=o[x]h=n(-703112+661054)s=-764112-(-764367)C=-633885+633985 x=-585177-(-585178)o=M(x,C)x=T()c[x]=o y=314772+-314770 M=c[u]C=-463999-(-463999)o=M(C,s)s=846441-846440 C=T()c[C]=o M=c[u]w=c[x]o=M(s,w)s=T()c[s]=o o=c[u]w=o(W,y)E=870555+-860555 y=n(627450+-669479)o=-481885+481886 M=w==o o=n(531502+-573566)w=T()c[w]=M D=f[h]U=c[u]I={U(S,E)}h=D(p(I))M=n(136693+-178743)D=n(-1019345+977316)K=h..D M=V[M]W=y..K M=M(V,o,W)W=T()y=n(908700-950734)c[W]=M o=f[y]K=R(-189426+8907009,{u;r,d;A;j;g,w,W,x;s,C,k})y={o(K)}M={p(y)}y=M M=c[w]M=M and 7661888-919753 or 1053+774673 end else if M<12583+5712196 then M=c[z[348391-348381]]j=c[z[649752-649741]]B[M]=j M=c[z[904627-904615]]j={M(B)}o={p(j)}M=f[n(-617778+575746)]else B=n(-813237+771194)M=f[B]A=1015520+-1015520 j=c[z[-758984+758992]]B=M(j,A)M=579662-(-241034)end end end else if M<6972195-97787 then if M<7604578-902617 then if M<-324116+6981911 then if M<5479922-(-872834)then L=c[N]o=L M=794151+12633022 else M=true M=577911-549399 end else M=962311+8012916 c[j]=o end else if M<332441+6408246 then j=n(467934-509995)A=4317178-675410 B=j^A o=9799967-179735 M=o-B o=n(537378+-579405)B=M M=o/B o={M}M=f[n(-931334+889312)]else K=c[j]o=K M=K and 8605031-897386 or 6610720-(-57055)end end else if M<690370+6334565 then if M<7276311-268460 then o=n(986489-1028519)J=n(43894+-85928)Z=n(237445+-279503)M=f[o]k=a(5137852-2384,{})B=c[z[-258182+258186]]A=f[Z]u=f[J]J={u(k)}L={p(J)}u=196072+-196070 N=L[u]Z=A(N)A=n(-583655-(-541591))j=B(Z,A)B={j()}o=M(p(B))j=c[z[-822129+822134]]B=o o=j M=j and 11208328-538038 or 401301+7681781 else o=K M=D M=315161+6352614 end else if M<6877933-(-225556)then d=742288-742285 X=954203+-954138 k=T()c[k]=o M=c[u]V=a(529478+6196787,{})o=M(d,X)O=n(-271977-(-229943))d=T()c[d]=o l=n(144406-186464)M=-676337-(-676337)o=f[O]X=M M=-25354-(-25354)O={o(V)}e=M o=45862+-45860 M={p(O)}O=M M=O[o]o=n(935330+-977360)V=M M=f[o]g=c[A]b=f[l]l=b(V)b=n(386191-428255)Y=g(l,b)g={Y()}o=M(p(g))g=T()c[g]=o M=1486197-(-33129)o=988257-988256 Y=c[d]b=Y Y=-636043-(-636044)l=Y Y=-214584-(-214584)t=l<Y Y=o-l else b=c[j]Y=b M=b and 360573-(-541715)or 8951936-(-7692)end end end end end else if M<10461125-109568 then if M<76520+8893236 then if M<8303272-(-140831)then if M<709713+7185911 then if M<7963992-315230 then if M<7978464-554612 then d=d+X O=not e J=d<=k J=O and J O=d>=k O=e and O J=O or J O=9119943-(-903782)M=J and O J=901520+13129851 M=M or J else t=n(954851-996918)M=f[t]t=n(999887+-1041923)f[t]=M M=-649111+5790803 end else D=M I=-770787+770788 U=y[I]I=false h=U==I M=h and 4747617-(-206850)or 6850432-(-158782)K=h end else if M<110228+7981887 then c[z[-904004+904009]]=o M=-108613+10181649 B=nil else M=d o=k M=k and 6914743-(-124748)or 9829833-(-557868)end end else if M<-954957+9716155 then if M<-473464+9176988 then o=n(461732+-503799)B=n(-601404+559368)M=f[o]o=f[B]B=n(36324+-78360)f[B]=M M=15967584-(-361282)B=n(853209+-895276)f[B]=o B=c[z[587063-587062]]j=B()else Z=21914-21913 j=c[z[-1005834+1005835]]N=762367+-762365 A=j(Z,N)j=-470804-(-470805)B=A==j M=B and 9373558-(-358258)or-499426+14626441 o=B end else if M<238511+8625974 then l=n(352545+-394603)M=f[l]r=n(22045-64081)t=f[r]l=M(t)M=n(-950769-(-908702))f[M]=l M=5547301-405609 else c[j]=Y M=c[j]M=M and-268110+14344903 or 6811390-183664 end end end else if M<66510+9982795 then if M<10234776-489044 then if M<9476354-(-255446)then if M<10457251-971767 then x=P(x)s=P(s)y=nil M=757675-(-761651)w=P(w)r=P(r)W=P(W)C=P(C)else M=true A=n(434277+-476318)Z=T()j=T()B=m c[j]=M o=f[A]N=T()A=n(926298-968345)M=o[A]A=T()J=G(2208643-762205,{N})c[A]=M M=H(16155914-(-86094),{})c[Z]=M M=false u=n(-681270-(-639236))c[N]=M L=f[u]u=L(J)o=u M=u and-490511+6570473 or-187001+13614174 end else M=o and 7083403-78289 or 10436479-363443 end else if M<-203771+10158784 then M=9421050-(-894926)else J=d l=n(360094-402135)b=f[l]l=n(718892+-760947)Y=b[l]b=Y(B,J)Y=c[z[-105600-(-105606)]]l=Y()J=nil g=b+l V=g+L M=157290+7218863 l=440846-440845 g=-237987-(-238243)O=V%g g=A[j]L=O b=L+l Y=Z[b]V=g..Y A[j]=V end end else if M<826884+9398006 then if M<354268+9809752 then M=c[z[27363+-27356]]M=M and 5647886-(-77551)or 658957+161739 else g=g+r V=g<=t C=not x V=C and V C=g>=t C=x and C V=C or V C=-65163+13902556 M=V and C V=-893773+11230560 M=M or V end else if M<10489092-161731 then o={j}M=f[n(507346+-549394)]else g=#O t=-632530-(-632530)V=g==t M=4774729-525465 end end end end else if M<1019794+13007772 then if M<12523325-(-702922)then if M<12633639-426690 then if M<-194878+11181405 then if M<162318+10444571 then d=n(150091-192142)k=f[d]M=7939232-899741 o=k else A=c[z[776024-776018]]M=-716843+8799925 j=A==B o=j end else M=true M=M and-944638+1093098 or 281605+15427645 end else if M<13039542-752444 then j=A k=-854968-(-855223)J=203476-203476 M=c[z[-1007056+1007057]]u=M(J,k)B[j]=u j=nil M=634327+4482838 else M=782148+10885229 end end else if M<481514+13315523 then if M<13674134-298178 then V={}g=T()h=nil w=n(-674412-(-632355))c[g]=V t=Q(-136205+2377095,{g;k;d,N})L=nil V=T()y=n(-907868-(-865808))r=T()O=nil J=nil c[V]=t C={}Z=nil t={}x=n(-968314-(-926276))X=nil c[r]=t t=f[x]o={}u=nil W=c[r]N=P(N)M=f[n(-919004-(-876980))]u=n(126077+-168129)s={[w]=W;[y]=h}x=t(C,s)j=x t=H(285744+16079872,{r,g;e,k;d;V})V=P(V)e=P(e)A=t k=P(k)X=27349187343022-(-311057)r=P(r)N=n(-611282-(-569214))d=P(d)Z=f[N]d=n(95909-137968)g=P(g)L=f[u]k=A(d,X)J=j[k]k=n(-355333-(-313310))k=L[k]j=nil u={k(L,J)}N=Z(p(u))A=nil Z=N()else u=n(836130-878167)L=o J=n(-687669+645613)o=f[u]u=n(-443944-(-401895))e=n(1003976+-1046032)M=o[u]u=T()c[u]=M o=f[J]J=n(531127-573162)M=o[J]X=f[e]k=X d=M J=M M=X and 5091830-(-376995)or 646788+7583968 end else if M<-511838+14423575 then V=g C=V M=975694+9218013 O[V]=C V=nil else A=n(179198+-221254)M=f[n(985959-1028012)]j=f[A]A=n(-373015+330961)B=j[A]A=c[z[-914825-(-914826)]]j={B(A)}o={p(j)}end end end else if M<-467083+16608055 then if M<674633+13404453 then if M<849487+13222495 then if M<628408+13407386 then u=nil M=-24300+10340276 L=nil Z=nil else X=-656797+656810 A=-850246-(-850278)j=c[z[-449941+449944]]k=701481-701479 B=j%A Z=c[z[-592662+592666]]u=c[z[671247-671245]]V=c[z[52888+-52885]]O=V-B V=80668+-80636 e=O/V d=X-e J=k^d L=u/J N=Z(L)Z=4295547771-580475 X=-87817+88073 A=N%Z N=460612-460610 J=27847-27846 Z=N^B M=-340208+14256040 j=A/Z Z=c[z[362443+-362439]]u=j%J J=596110+4294371186 L=u*J N=Z(L)Z=c[z[557268-557264]]L=Z(j)u=501691-436155 k=912860-912604 A=N+L N=596661+-531125 B=nil Z=A%N L=A-Z N=L/u u=438039+-437783 L=Z%u J=Z-L u=J/k Z=nil k=151642+-151386 J=N%k d=N-J A=nil j=nil N=nil k=d/X d={L,u;J,k}L=nil J=nil u=nil k=nil c[z[1044060+-1044059]]=d end else M=4581428-12970 end else if M<15684380-1026139 then j=c[z[-154677+154679]]M=911547+8820269 A=c[z[111691+-111688]]B=j==A o=B else M=f[n(405787-447820)]o={}end end else if M<16401260-62678 then if M<801140+15514839 then B=n(-233533-(-191491))o=n(179844+-221887)M=f[o]o=M(B)M=f[n(319096+-361121)]o={}else M=true M=M and 7959820-(-568369)or 1832970-(-679958)end else if M<17429846-981808 then M=c[z[304080-304079]]A=M B=m[-540488+540489]j=m[-580123+580125]M=A[j]M=M and 8978604-(-803503)or 16524698-60543 else u=497763+-497508 M={}J=n(878828+-920869)c[z[526189+-526187]]=M o=c[z[134091+-134088]]N=-680600+35184372769432 Z=o d=583875-583874 o=j%N M=7869130-492977 c[z[200878-200874]]=o L=j%u u=-53137+53139 N=L+u c[z[-523013+523018]]=N u=f[J]J=n(-1007776-(-965731))X=d L=u[J]d=789591+-789591 u=L(B)J=-464600+464601 e=X<d L=n(225713+-267779)A[j]=L d=J-X L=154043-153902 k=u end end end end end end end M=#F return p(o)end,function(f)for n=936535-936534,#f,-306404-(-306405)do B[f[n]]=B[f[n]]+(-173464+173465)end if m then local M=m(true)local p=F(M)p[n(96447-138504)],p[n(-474526-(-432463))],p[n(-677037-(-635011))]=f,Z,function()return 132649+-3749496 end return M else return z({},{[n(-910348+868285)]=Z;[n(-300790+258733)]=f,[n(820046+-862072)]=function()return 26865+-3643712 end})end end,{},function(f)local n,M=775795-775794,f[-64668-(-64669)]while M do B[M],n=B[M]-(-94216-(-94217)),(152090+-152089)+n if-180304+180304==B[M]then B[M],c[M]=nil,nil end M=f[n]end end,function(f,n)local p=A(n)local m=function(m)return M(f,{m},n,p)end return m end return(N(640691+9045386,{}))(p(o))end)(getfenv and getfenv()or _ENV,unpack or table[n(-176896+134845)],newproxy,setmetatable,getmetatable,select,{...})end)(...)
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local HttpService = game:GetService("HttpService")
+local TeleportService = game:GetService("TeleportService")
+local VirtualUser = game:GetService("VirtualUser")
+local LocalPlayer = Players.LocalPlayer
+local u15 = {}
+local Config = {
+    AutoFarm = false,
+    Stealth = false,
+    AutoSwitchSurvivor = false,
+    TargetGens = 5,
+    ToggleKey = Enum.KeyCode.RightShift,
+    KillAll = false,
+    KillAllTeleport = false,
+    KillAllFly = false,
+    KillAllCooldown = 0.2,
+    AuraRange = 20,
+    AntiAfk = false,
+    AntiAfkInterval = 3,
+}
+local Stats = {
+    Fixed = 0,
+    Puzzles = 0,
+    Hops = 0,
+    StartTime = os.clock(),
+    Kills = 0,
+}
+local isFarming = false
+local isWaiting = false
+local elapsed = os.clock()
+local currentTarget = nil
+local isKiller = false
+local killAllConnection = nil
+local lastAttackTime = 0
+local isMinimized = false
+local antiAfkConnection = nil
+local lastAntiAfk = 0
+pcall(function()
+    if isfile("antsaken_config.json") then
+        local data = HttpService:JSONDecode(readfile("antsaken_config.json"))
+        if data then
+            for k, v in pairs(data) do
+                if Config[k] ~= nil then
+                    Config[k] = v
+                end
+            end
+        end
+    end
+end)
+local function AntiAfkLoop()
+    if antiAfkConnection then
+        antiAfkConnection:Disconnect()
+        antiAfkConnection = nil
+    end
+    lastAntiAfk = os.clock()
+    antiAfkConnection = RunService.Heartbeat:Connect(function()
+        if not Config.AntiAfk then
+            if antiAfkConnection then
+                antiAfkConnection:Disconnect()
+                antiAfkConnection = nil
+            end
+            return
+        end
+        if os.clock() - lastAntiAfk < Config.AntiAfkInterval then return end
+        lastAntiAfk = os.clock()
+        if not LocalPlayer.Character then return end
+        local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if not humanoid then return end
+        local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if not rootPart then return end
+        local randomX = math.random(-15, 15)
+        local randomZ = math.random(-15, 15)
+        local randomPos = rootPart.Position + Vector3.new(randomX, 0, randomZ)
+        humanoid:MoveTo(randomPos)
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+end
+local function GetAliveSurvivors()
+    local survivors = {}
+    local playersContainer = workspace:FindFirstChild("Players")
+    if not playersContainer then return survivors end
+    local survivorsGroup = playersContainer:FindFirstChild("Survivors")
+    if not survivorsGroup then return survivors end
+    for _, child in ipairs(survivorsGroup:GetChildren()) do
+        if child:IsA("Model") then
+            local humanoid = child:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid.Health > 0 then
+                local rootPart = child:FindFirstChild("HumanoidRootPart")
+                if rootPart then
+                    local localChar = LocalPlayer.Character
+                    local distance = 999
+                    if localChar and localChar.PrimaryPart then
+                        distance = (rootPart.Position - localChar.PrimaryPart.Position).Magnitude
+                    end
+                    table.insert(survivors, {
+                        Model = child,
+                        Humanoid = humanoid,
+                        RootPart = rootPart,
+                        Distance = distance,
+                    })
+                end
+            end
+        end
+    end
+    table.sort(survivors, function(a, b) return a.Distance < b.Distance end)
+    return survivors
+end
+local function CheckIsKiller()
+    local playersContainer = workspace:FindFirstChild("Players")
+    if not playersContainer then return false end
+    local killersGroup = playersContainer:FindFirstChild("Killers")
+    if not killersGroup then return false end
+    for _, child in ipairs(killersGroup:GetChildren()) do
+        if child:IsA("Model") and child:GetAttribute("Username") == LocalPlayer.Name then
+            return true
+        end
+    end
+    return false
+end
+local function GetKillerAttackAbility()
+    if not LocalPlayer.Character then return "Slash" end
+    local charName = LocalPlayer.Character.Name
+    if charName == "Noli" then return "Stab" end
+    if charName == "c001kidd" then return "Punch" end
+    if charName == "1x1x1x1" then return "Slash" end
+    if charName == "Slasher" then return "Slash" end
+    if charName == "Guest1337" then return "Punch" end
+    return "Slash"
+end
+local function AttackSurvivor()
+    local currentTime = os.clock()
+    if currentTime - lastAttackTime < Config.KillAllCooldown then return false end
+    local success = false
+    pcall(function()
+        local remoteEvent = ReplicatedStorage:FindFirstChild("Modules")
+        if remoteEvent then
+            local network = remoteEvent:FindFirstChild("Network")
+            if network then
+                local remote = network:FindFirstChild("RemoteEvent")
+                if remote then
+                    remote:FireServer("UseActorAbility", GetKillerAttackAbility())
+                    success = true
+                end
+            end
+        end
+    end)
+    if not success then
+        pcall(function()
+            VirtualUser:CaptureController()
+            VirtualUser:ClickButton1(Vector2.new())
+            success = true
+        end)
+    end
+    if success then
+        lastAttackTime = currentTime
+        Stats.Kills = Stats.Kills + 1
+    end
+    return success
+end
+local function TeleportBehindSurvivor(target)
+    if not target or not target.RootPart then return false end
+    if not LocalPlayer.Character then return false end
+    local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if not rootPart then return false end
+    local lookVector = target.RootPart.CFrame.LookVector
+    local behindPos = target.RootPart.Position - lookVector * 2.7 + Vector3.new(0, 1.5, 0)
+    rootPart.CFrame = CFrame.new(behindPos, target.RootPart.Position)
+    return true
+end
+local function FlyToSurvivor(target)
+    if not target or not target.RootPart then return false end
+    if not LocalPlayer.Character then return false end
+    local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    if not humanoid then return false end
+    local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if not rootPart then return false end
+    local direction = (target.RootPart.Position - rootPart.Position).Unit
+    local moveToPos = rootPart.Position + direction * 15
+    humanoid:MoveTo(moveToPos)
+    return true
+end
+local function KillAllLoop()
+    if killAllConnection then
+        killAllConnection:Disconnect()
+        killAllConnection = nil
+    end
+    killAllConnection = RunService.Heartbeat:Connect(function()
+        if not Config.KillAll then
+            if killAllConnection then
+                killAllConnection:Disconnect()
+                killAllConnection = nil
+            end
+            return
+        end
+        if not CheckIsKiller() then
+            isKiller = false
+            return
+        end
+        isKiller = true
+        if currentTarget then
+            if not currentTarget.Model or not currentTarget.Model.Parent then
+                currentTarget = nil
+            elseif currentTarget.Humanoid and currentTarget.Humanoid.Health <= 0 then
+                currentTarget = nil
+            end
+        end
+        if not currentTarget then
+            local survivors = GetAliveSurvivors()
+            if #survivors > 0 then
+                currentTarget = survivors[1]
+            else
+                return
+            end
+        end
+        if Config.KillAllTeleport then
+            TeleportBehindSurvivor(currentTarget)
+            task.wait(0.05)
+        elseif Config.KillAllFly then
+            FlyToSurvivor(currentTarget)
+        end
+        if currentTarget and currentTarget.RootPart then
+            local localChar = LocalPlayer.Character
+            if localChar and localChar.PrimaryPart then
+                local distance = (currentTarget.RootPart.Position - localChar.PrimaryPart.Position).Magnitude
+                if distance < Config.AuraRange then
+                    AttackSurvivor()
+                end
+            end
+        end
+    end)
+end
+local function GetGenerators()
+    local gens = {}
+    local map = workspace:FindFirstChild("Map")
+    if map then
+        local ingame = map:FindFirstChild("Ingame")
+        if ingame then
+            local map2 = ingame:FindFirstChild("Map")
+            if map2 then
+                for _, child in ipairs(map2:GetChildren()) do
+                    if child.Name == "Generator" and child:IsA("Model") then
+                        local progress = child:FindFirstChild("Progress")
+                        local remotes = child:FindFirstChild("Remotes")
+                        if progress and remotes and child.PrimaryPart then
+                            local position = nil
+                            local main = child:FindFirstChild("Main")
+                            local positions = child:FindFirstChild("Positions")
+                            if positions then
+                                local center = positions:FindFirstChild("Center")
+                                if center then position = center.Position end
+                            end
+                            if not position and main then
+                                local prompt = main:FindFirstChild("Prompt")
+                                if prompt and prompt:IsA("ProximityPrompt") then
+                                    local attachment = prompt:FindFirstChildOfClass("Attachment")
+                                    if attachment then position = attachment.WorldCFrame.Position end
+                                end
+                            end
+                            if not position and main then
+                                for _, part in ipairs(main:GetChildren()) do
+                                    if part:IsA("BasePart") then
+                                        position = part.Position + Vector3.new(0, 3, 0)
+                                        break
+                                    end
+                                end
+                            end
+                            if not position then
+                                position = child.PrimaryPart.Position + Vector3.new(0, 5, 0)
+                            end
+                            table.insert(gens, {
+                                Model = child,
+                                Progress = progress,
+                                RF = remotes:FindFirstChild("RF"),
+                                RE = remotes:FindFirstChild("RE"),
+                                Prompt = main and main:FindFirstChild("Prompt"),
+                                Position = position,
+                                GenPosition = child.PrimaryPart.Position,
+                            })
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return gens
+end
+local function FixGenerator(gen)
+    if not gen.Model or not gen.Model.Parent then return false end
+    if gen.Progress.Value >= 100 then return true end
+    local character = LocalPlayer.Character
+    if not character then return false end
+    local rootPart = character:FindFirstChild("HumanoidRootPart")
+    if not rootPart then return false end
+    rootPart.CFrame = CFrame.new(gen.Position + Vector3.new(0, 2, 0))
+    task.wait(0.25)
+    pcall(function() gen.RF:InvokeServer("Enter") end)
+    task.wait(0.15)
+    pcall(function() gen.RE:FireServer() end)
+    task.wait(0.15)
+    task.spawn(function() pcall(function() gen.RF:InvokeServer("Leave") end) end)
+    isWaiting = false
+    elapsed = os.clock()
+    return true
+end
+local function AutoSwitchSurvivor()
+    if not Config.AutoSwitchSurvivor then return end
+    pcall(function()
+        local DataHandler = require(ReplicatedStorage.Modules.Data.DataHandler)
+        local Network = require(ReplicatedStorage.Modules.Network.Network)
+        local data = DataHandler:Get()
+        if not data then return end
+        local survivors = {}
+        for _, child in ipairs(data.Purchased.Survivors:GetChildren()) do
+            if child:IsA("IntValue") or child:IsA("NumberValue") then
+                local asset = ReplicatedStorage.Assets.Survivors:FindFirstChild(child.Name)
+                if asset then
+                    local level = math.floor((math.sqrt(child.Value * 20 + 11225) - 95) / 10)
+                    table.insert(survivors, {
+                        Name = child.Name,
+                        XP = child.Value,
+                        Level = math.min(level, 100),
+                        Asset = asset
+                    })
+                end
+            end
+        end
+        if #survivors > 0 then
+            table.sort(survivors, function(a, b) return a.Level > b.Level end)
+            local target = nil
+            for _, v in ipairs(survivors) do
+                if v.Level < 100 then
+                    target = v
+                    break
+                end
+            end
+            if not target then target = survivors[#survivors] end
+            if target and data.Equipped.Survivor.Value ~= target.Name then
+                Network:FireServerConnection("EquipState", "REMOTE_EVENT", target.Asset, true)
+            end
+        end
+    end)
+end
+local function StartFarm()
+    if isFarming then return end
+    isFarming = true
+    Stats.Fixed = 0
+    Stats.StartTime = os.clock()
+    if Config.AutoSwitchSurvivor then task.spawn(AutoSwitchSurvivor) end
+    elapsed = os.clock()
+    local stallCount = 0
+    task.spawn(function()
+        while isFarming do
+            if not isWaiting then
+                elapsed = os.clock()
+                stallCount = 0
+            elseif os.clock() - elapsed > 30 then
+                stallCount = stallCount + 1
+                elapsed = os.clock()
+                if stallCount >= 3 then
+                    isFarming = false
+                    task.wait(0.5)
+                    return
+                end
+            end
+            task.wait(0.5)
+        end
+    end)
+    local deathConnection = nil
+    while isFarming do
+        local character = LocalPlayer.Character
+        if character and character.Parent then
+            local parentName = character.Parent.Name
+            if parentName == "Survivors" or parentName == "Killers" then
+                if not deathConnection then
+                    local humanoid = character:FindFirstChildOfClass("Humanoid")
+                    if humanoid then
+                        deathConnection = humanoid.Died:Connect(function()
+                            if isFarming then
+                                isFarming = false
+                                task.wait(1)
+                            end
+                        end)
+                    end
+                end
+                local gens = GetGenerators()
+                local totalGens = #gens
+                local doneGens = 0
+                local availableGens = {}
+                for _, gen in ipairs(gens) do
+                    if gen.Progress.Value >= 100 then doneGens = doneGens + 1 else table.insert(availableGens, gen) end
+                end
+                if totalGens > 0 and doneGens >= Config.TargetGens then
+                    isFarming = false
+                    task.wait(0.5)
+                    break
+                end
+                if #availableGens > 0 then
+                    for _, gen in ipairs(availableGens) do
+                        if not isFarming then break end
+                        local character2 = LocalPlayer.Character
+                        if not character2 or not character2.Parent then break end
+                        if gen.Progress.Value < 100 and gen.Model and gen.Model.Parent then
+                            if FixGenerator(gen) then Stats.Fixed = Stats.Fixed + 1 end
+                        end
+                    end
+                else
+                    task.wait(0.3)
+                end
+            else
+                if deathConnection then deathConnection:Disconnect(); deathConnection = nil end
+                task.wait(1)
+            end
+        else
+            if deathConnection then deathConnection:Disconnect(); deathConnection = nil end
+            task.wait(1)
+        end
+    end
+    if deathConnection then deathConnection:Disconnect() end
+end
+local hiddenGuis = {}
+local hiddenProperties = {}
+local stealthConnection = nil
+local walkSpeed = nil
+local maxSlopeAngle = nil
+function EnableStealth()
+    Config.Stealth = true
+    local character = LocalPlayer.Character
+    if not character then return end
+    pcall(function()
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            hiddenProperties.health = humanoid.HealthDisplayType
+            hiddenProperties.name = humanoid.DisplayDistanceType
+            humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+            humanoid.HealthDisplayType = Enum.HumanoidHealthDisplayType.AlwaysOff
+            walkSpeed = humanoid.WalkSpeed
+            maxSlopeAngle = humanoid.MaxSlopeAngle
+            humanoid.WalkSpeed = 16
+            humanoid.MaxSlopeAngle = 45
+        end
+        local function hideGui(instance)
+            if instance:IsA("BillboardGui") or instance:IsA("SurfaceGui") then
+                if instance.Enabled then
+                    table.insert(hiddenGuis, instance)
+                    instance.Enabled = false
+                end
+            end
+        end
+        for _, part in ipairs(character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                for _, child in ipairs(part:GetChildren()) do hideGui(child) end
+            end
+        end
+        for _, child in ipairs(character:GetChildren()) do
+            if child:IsA("BillboardGui") or child:IsA("SurfaceGui") then hideGui(child) end
+        end
+    end)
+    pcall(function()
+        setsimulationradius(100)  -- ✅ ARREGLADO: antes era 0 (rompía todo)
+        if sethiddenproperty then
+            sethiddenproperty(LocalPlayer, "MaximumSimulationRadius", 100)  -- ✅ ARREGLADO
+        end
+    end)
+    if stealthConnection then stealthConnection:Disconnect() end
+    stealthConnection = RunService.Heartbeat:Connect(function()
+        if Config.Stealth then pcall(function() setsimulationradius(100) end) end  -- ✅ ARREGLADO
+    end)
+end
+function DisableStealth()
+    Config.Stealth = false
+    pcall(function()
+        local character = LocalPlayer.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                if hiddenProperties.health then humanoid.HealthDisplayType = hiddenProperties.health end
+                if hiddenProperties.name then humanoid.DisplayDistanceType = hiddenProperties.name end
+                if walkSpeed then humanoid.WalkSpeed = walkSpeed end
+                if maxSlopeAngle then humanoid.MaxSlopeAngle = maxSlopeAngle end
+            end
+        end
+        for _, gui in ipairs(hiddenGuis) do
+            if gui and gui.Parent then gui.Enabled = true end
+        end
+        hiddenGuis = {}
+        hiddenProperties = {}
+    end)
+    pcall(function()
+        setsimulationradius(2048)
+        if sethiddenproperty then
+            sethiddenproperty(LocalPlayer, "MaximumSimulationRadius", 2048)
+        end
+    end)
+    if stealthConnection then
+        stealthConnection:Disconnect()
+        stealthConnection = nil
+    end
+end
+local function CreateUI()
+    if LocalPlayer.PlayerGui:FindFirstChild("AntSakenAutoFarm") then
+        LocalPlayer.PlayerGui.AntSakenAutoFarm:Destroy()
+    end
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "AntSakenAutoFarm"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.Parent = LocalPlayer.PlayerGui
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Size = UDim2.new(0, 0, 0, 0)
+    MainFrame.Position = UDim2.new(0.5, -150, 0.5, -290)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
+    MainFrame.BackgroundTransparency = 0
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Parent = ScreenGui
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
+    local Stroke = Instance.new("UIStroke", MainFrame)
+    Stroke.Color = Color3.fromRGB(40, 40, 55)
+    Stroke.Thickness = 1
+    local TitleBar = Instance.new("Frame")
+    TitleBar.Size = UDim2.new(1, 0, 0, 36)
+    TitleBar.Position = UDim2.new(0, 0, 0, 0)
+    TitleBar.BackgroundTransparency = 1
+    TitleBar.Parent = MainFrame
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(0.7, 0, 1, 0)
+    Title.Position = UDim2.new(0, 12, 0, 0)
+    Title.BackgroundTransparency = 1
+    Title.Text = "AntSaken-AutoFarm"
+    Title.TextColor3 = Color3.fromRGB(230, 230, 240)
+    Title.Font = Enum.Font.GothamBlack
+    Title.TextSize = 14
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+    Title.Parent = TitleBar
+    local MinimizeBtn = Instance.new("TextButton")
+    MinimizeBtn.Size = UDim2.new(0, 0, 0, 0)
+    MinimizeBtn.Position = UDim2.new(1, -36, 0.5, -14)
+    MinimizeBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    MinimizeBtn.Text = "−"
+    MinimizeBtn.TextColor3 = Color3.fromRGB(200, 200, 210)
+    MinimizeBtn.Font = Enum.Font.GothamBold
+    MinimizeBtn.TextSize = 18
+    MinimizeBtn.BorderSizePixel = 0
+    MinimizeBtn.AutoButtonColor = false
+    MinimizeBtn.Parent = TitleBar
+    Instance.new("UICorner", MinimizeBtn).CornerRadius = UDim.new(1, 0)
+    local RestoreBtn = Instance.new("TextButton")
+    RestoreBtn.Size = UDim2.new(0, 0, 0, 0)
+    RestoreBtn.Position = MainFrame.Position
+    RestoreBtn.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
+    RestoreBtn.Text = "+"
+    RestoreBtn.TextColor3 = Color3.fromRGB(200, 200, 210)
+    RestoreBtn.Font = Enum.Font.GothamBold
+    RestoreBtn.TextSize = 24
+    RestoreBtn.BorderSizePixel = 0
+    RestoreBtn.AutoButtonColor = false
+    RestoreBtn.Visible = false
+    RestoreBtn.Parent = ScreenGui
+    Instance.new("UICorner", RestoreBtn).CornerRadius = UDim.new(1, 0)
+    local RestoreStroke = Instance.new("UIStroke", RestoreBtn)
+    RestoreStroke.Color = Color3.fromRGB(40, 40, 55)
+    RestoreStroke.Thickness = 1
+    local Credit = Instance.new("TextLabel")
+    Credit.Size = UDim2.new(1, 0, 0, 18)
+    Credit.Position = UDim2.new(0, 0, 0, 36)
+    Credit.BackgroundTransparency = 1
+    Credit.Text = "Made by Pichigdasos (Original: Ant W Ant)"
+    Credit.TextColor3 = Color3.fromRGB(180, 180, 200)
+    Credit.Font = Enum.Font.Gotham
+    Credit.TextSize = 9
+    Credit.TextTransparency = 0.4
+    Credit.Parent = MainFrame
+    local Sep = Instance.new("Frame")
+    Sep.Size = UDim2.new(0.9, 0, 0, 1)
+    Sep.Position = UDim2.new(0.05, 0, 0, 56)
+    Sep.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+    Sep.BorderSizePixel = 0
+    Sep.Parent = MainFrame
+    local Scroll = Instance.new("ScrollingFrame")
+    Scroll.Size = UDim2.new(1, -10, 1, -72)
+    Scroll.Position = UDim2.new(0, 5, 0, 60)
+    Scroll.BackgroundTransparency = 1
+    Scroll.ScrollBarThickness = 3
+    Scroll.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 65)
+    Scroll.BorderSizePixel = 0
+    Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+    Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    Scroll.Parent = MainFrame
+    local Layout = Instance.new("UIListLayout", Scroll)
+    Layout.Padding = UDim.new(0, 4)
+    Layout.SortOrder = Enum.SortOrder.LayoutOrder
+    local function AddToggle(label, configKey, onChange, tooltip)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, 0, 0, 32)
+        frame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
+        frame.BorderSizePixel = 0
+        frame.Parent = Scroll
+        Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 6)
+        local labelText = Instance.new("TextLabel")
+        labelText.Size = UDim2.new(1, -60, 1, 0)
+        labelText.Position = UDim2.new(0, 10, 0, 0)
+        labelText.BackgroundTransparency = 1
+        labelText.Text = label
+        labelText.TextColor3 = Color3.fromRGB(200, 200, 210)
+        labelText.Font = Enum.Font.GothamBold
+        labelText.TextSize = 10
+        labelText.TextXAlignment = Enum.TextXAlignment.Left
+        labelText.Parent = frame
+        local toggleBtn = Instance.new("TextButton")
+        toggleBtn.Size = UDim2.new(0, 44, 0, 20)
+        toggleBtn.Position = UDim2.new(1, -52, 0.5, -10)
+        toggleBtn.BackgroundColor3 = Config[configKey] and Color3.fromRGB(100, 200, 255) or Color3.fromRGB(35, 35, 45)
+        toggleBtn.Text = ""
+        toggleBtn.BorderSizePixel = 0
+        toggleBtn.AutoButtonColor = false
+        toggleBtn.Parent = frame
+        Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(1, 0)
+        local knob = Instance.new("Frame")
+        knob.Size = UDim2.new(0, 14, 0, 14)
+        knob.Position = Config[configKey] and UDim2.new(1, -18, 0.5, -7) or UDim2.new(0, 3, 0.5, -7)
+        knob.BackgroundColor3 = Config[configKey] and Color3.fromRGB(10, 10, 16) or Color3.fromRGB(255, 255, 255)
+        knob.BorderSizePixel = 0
+        knob.Parent = toggleBtn
+        Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
+        if tooltip then
+            local tooltipLabel = Instance.new("TextLabel")
+            tooltipLabel.Size = UDim2.new(1, 0, 0, 14)
+            tooltipLabel.Position = UDim2.new(0, 0, 1, 2)
+            tooltipLabel.BackgroundTransparency = 1
+            tooltipLabel.Text = tooltip
+            tooltipLabel.TextColor3 = Color3.fromRGB(100, 100, 120)
+            tooltipLabel.Font = Enum.Font.Gotham
+            tooltipLabel.TextSize = 7
+            tooltipLabel.TextXAlignment = Enum.TextXAlignment.Left
+            tooltipLabel.Visible = false
+            tooltipLabel.Parent = frame
+            frame.MouseEnter:Connect(function()
+                tooltipLabel.Visible = true
+            end)
+            frame.MouseLeave:Connect(function()
+                tooltipLabel.Visible = false
+            end)
+        end
+        local function updateToggle(value)
+            Config[configKey] = value
+            TweenService:Create(toggleBtn, TweenInfo.new(0.15), {
+                BackgroundColor3 = value and Color3.fromRGB(100, 200, 255) or Color3.fromRGB(35, 35, 45)
+            }):Play()
+            TweenService:Create(knob, TweenInfo.new(0.15, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                Position = value and UDim2.new(1, -18, 0.5, -7) or UDim2.new(0, 3, 0.5, -7),
+                BackgroundColor3 = value and Color3.fromRGB(10, 10, 16) or Color3.fromRGB(255, 255, 255)
+            }):Play()
+            if onChange then onChange(value) end
+            pcall(function()
+                writefile("antsaken_config.json", HttpService:JSONEncode(Config))
+            end)
+        end
+        toggleBtn.MouseButton1Click:Connect(function()
+            updateToggle(not Config[configKey])
+        end)
+        toggleBtn.MouseEnter:Connect(function()
+            TweenService:Create(toggleBtn, TweenInfo.new(0.1), {
+                BackgroundColor3 = Config[configKey] and Color3.fromRGB(120, 220, 255) or Color3.fromRGB(45, 45, 55)
+            }):Play()
+        end)
+        toggleBtn.MouseLeave:Connect(function()
+            TweenService:Create(toggleBtn, TweenInfo.new(0.1), {
+                BackgroundColor3 = Config[configKey] and Color3.fromRGB(100, 200, 255) or Color3.fromRGB(35, 35, 45)
+            }):Play()
+        end)
+        return updateToggle
+    end
+    local function AddButton(label, callback, color, tooltip)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(1, 0, 0, 28)
+        btn.BackgroundColor3 = color or Color3.fromRGB(25, 25, 32)
+        btn.TextColor3 = Color3.fromRGB(200, 200, 210)
+        btn.Text = label
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 10
+        btn.BorderSizePixel = 0
+        btn.AutoButtonColor = false
+        btn.Parent = Scroll
+        Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+        if tooltip then
+            local tooltipLabel = Instance.new("TextLabel")
+            tooltipLabel.Size = UDim2.new(1, 0, 0, 14)
+            tooltipLabel.Position = UDim2.new(0, 0, 1, 2)
+            tooltipLabel.BackgroundTransparency = 1
+            tooltipLabel.Text = tooltip
+            tooltipLabel.TextColor3 = Color3.fromRGB(100, 100, 120)
+            tooltipLabel.Font = Enum.Font.Gotham
+            tooltipLabel.TextSize = 7
+            tooltipLabel.TextXAlignment = Enum.TextXAlignment.Left
+            tooltipLabel.Visible = false
+            tooltipLabel.Parent = btn
+            btn.MouseEnter:Connect(function()
+                tooltipLabel.Visible = true
+            end)
+            btn.MouseLeave:Connect(function()
+                tooltipLabel.Visible = false
+            end)
+        end
+        btn.MouseButton1Click:Connect(callback)
+        btn.MouseEnter:Connect(function()
+            TweenService:Create(btn, TweenInfo.new(0.15), {
+                BackgroundColor3 = (color or Color3.fromRGB(25, 25, 32)) + Color3.fromRGB(13, 13, 16)
+            }):Play()
+        end)
+        btn.MouseLeave:Connect(function()
+            TweenService:Create(btn, TweenInfo.new(0.15), {
+                BackgroundColor3 = color or Color3.fromRGB(25, 25, 32)
+            }):Play()
+        end)
+    end
+    local function AddSection(title)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, 0, 0, 20)
+        frame.BackgroundTransparency = 1
+        frame.Parent = Scroll
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, 0, 1, 0)
+        label.BackgroundTransparency = 1
+        label.Text = string.upper(title)
+        label.TextColor3 = Color3.fromRGB(80, 80, 95)
+        label.Font = Enum.Font.GothamBlack
+        label.TextSize = 8
+        label.TextXAlignment = Enum.TextXAlignment.Left
+        label.Parent = frame
+    end
+    AddSection("SURVIVOR CONTROLS")
+    AddToggle("Auto Farm", "AutoFarm", function(value)
+        if value then
+            if not isFarming then task.spawn(StartFarm) end
+        else
+            isFarming = false
+        end
+    end, "Automatically repairs generators")
+    AddToggle("Auto Survivor", "AutoSwitchSurvivor", function(value)
+        if value then task.spawn(AutoSwitchSurvivor) end
+    end, "Switch to best survivor automatically")
+    AddToggle("Stealth Mode", "Stealth", function(value)
+        if value then EnableStealth() else DisableStealth() end
+    end, "Hides UI elements and reduces visibility")
+    AddSection("KILL ALL")
+    AddToggle("Kill All", "KillAll", function(value)
+        if value then
+            if killAllConnection then
+                killAllConnection:Disconnect()
+                killAllConnection = nil
+            end
+            KillAllLoop()
+        else
+            if killAllConnection then
+                killAllConnection:Disconnect()
+                killAllConnection = nil
+            end
+            currentTarget = nil
+        end
+    end, "Hunt and kill survivors automatically")
+    AddToggle("Teleport Mode", "KillAllTeleport", nil, "Teleport behind survivors")
+    AddToggle("Fly Mode", "KillAllFly", nil, "Fly towards survivors")
+    AddSection("KILL ALL SETTINGS")
+    
+    local cooldownFrame = Instance.new("Frame")
+    cooldownFrame.Size = UDim2.new(1, 0, 0, 28)
+    cooldownFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
+    cooldownFrame.Parent = Scroll
+    Instance.new("UICorner", cooldownFrame).CornerRadius = UDim.new(0, 6)
+    local cooldownLabel = Instance.new("TextLabel")
+    cooldownLabel.Size = UDim2.new(0.6, 0, 1, 0)
+    cooldownLabel.Position = UDim2.new(0, 10, 0, 0)
+    cooldownLabel.BackgroundTransparency = 1
+    cooldownLabel.Text = "Attack Cooldown"
+    cooldownLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+    cooldownLabel.Font = Enum.Font.GothamBold
+    cooldownLabel.TextSize = 9
+    cooldownLabel.TextXAlignment = Enum.TextXAlignment.Left
+    cooldownLabel.Parent = cooldownFrame
+    local cooldownValue = Instance.new("TextLabel")
+    cooldownValue.Size = UDim2.new(0.3, 0, 1, 0)
+    cooldownValue.Position = UDim2.new(0.7, 0, 0, 0)
+    cooldownValue.BackgroundTransparency = 1
+    cooldownValue.Text = string.format("%.1fs", Config.KillAllCooldown)
+    cooldownValue.TextColor3 = Color3.fromRGB(255, 200, 80)
+    cooldownValue.Font = Enum.Font.GothamBold
+    cooldownValue.TextSize = 9
+    cooldownValue.TextXAlignment = Enum.TextXAlignment.Right
+    cooldownValue.Parent = cooldownFrame
+    local rangeFrame = Instance.new("Frame")
+    rangeFrame.Size = UDim2.new(1, 0, 0, 28)
+    rangeFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
+    rangeFrame.Parent = Scroll
+    Instance.new("UICorner", rangeFrame).CornerRadius = UDim.new(0, 6)
+    local rangeLabel = Instance.new("TextLabel")
+    rangeLabel.Size = UDim2.new(0.6, 0, 1, 0)
+    rangeLabel.Position = UDim2.new(0, 10, 0, 0)
+    rangeLabel.BackgroundTransparency = 1
+    rangeLabel.Text = "Attack Range"
+    rangeLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+    rangeLabel.Font = Enum.Font.GothamBold
+    rangeLabel.TextSize = 9
+    rangeLabel.TextXAlignment = Enum.TextXAlignment.Left
+    rangeLabel.Parent = rangeFrame
+    local rangeValue = Instance.new("TextLabel")
+    rangeValue.Size = UDim2.new(0.3, 0, 1, 0)
+    rangeValue.Position = UDim2.new(0.7, 0, 0, 0)
+    rangeValue.BackgroundTransparency = 1
+    rangeValue.Text = tostring(Config.AuraRange) .. " u"
+    rangeValue.TextColor3 = Color3.fromRGB(255, 200, 80)
+    rangeValue.Font = Enum.Font.GothamBold
+    rangeValue.TextSize = 9
+    rangeValue.TextXAlignment = Enum.TextXAlignment.Right
+    rangeValue.Parent = rangeFrame
+    AddSection("UTILITIES")
+    AddToggle("Anti AFK Bypass", "AntiAfk", function(value)
+        if value then
+            AntiAfkLoop()
+        else
+            if antiAfkConnection then
+                antiAfkConnection:Disconnect()
+                antiAfkConnection = nil
+            end
+        end
+    end, "Moves character every 3 seconds to avoid AFK kick")
+    AddSection("ACTIONS")
+    AddButton("Unload Script", function()
+        isFarming = false
+        if killAllConnection then killAllConnection:Disconnect(); killAllConnection = nil end
+        if antiAfkConnection then antiAfkConnection:Disconnect(); antiAfkConnection = nil end
+        pcall(function() writefile("antsaken_config.json", HttpService:JSONEncode(Config)) end)
+        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1}):Play()
+        task.wait(0.35)
+        ScreenGui:Destroy()
+    end, Color3.fromRGB(32, 18, 18), "Remove script from game")
+    AddSection("STATS")
+    local statsLabel = Instance.new("TextLabel")
+    statsLabel.Size = UDim2.new(1, 0, 0, 75)
+    statsLabel.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
+    statsLabel.Parent = Scroll
+    Instance.new("UICorner", statsLabel).CornerRadius = UDim.new(0, 6)
+    statsLabel.TextColor3 = Color3.fromRGB(150, 150, 165)
+    statsLabel.Font = Enum.Font.Gotham
+    statsLabel.TextSize = 9
+    statsLabel.TextXAlignment = Enum.TextXAlignment.Left
+    statsLabel.TextYAlignment = Enum.TextYAlignment.Top
+    statsLabel.TextWrapped = true
+    statsLabel.BackgroundTransparency = 0
+    statsLabel.Padding = UDim.new(0, 8)
+    statsLabel.Text = ""
+    task.spawn(function()
+        while ScreenGui and ScreenGui.Parent do
+            local elapsed2 = os.clock() - Stats.StartTime
+            local mins = math.floor(elapsed2 / 60)
+            local secs = math.floor(elapsed2 % 60)
+            statsLabel.Text = string.format(
+                "Gens: %d/%d | Kills: %d\nTime: %dm %ds\nKiller: %s | AntiAFK: %s\nStatus: %s",
+                Stats.Fixed,
+                Config.TargetGens,
+                Stats.Kills,
+                mins,
+                secs,
+                isKiller and "YES" or "NO",
+                Config.AntiAfk and "ON" or "OFF",
+                isFarming and "FARMING" or (Config.KillAll and isKiller and "KILLING" or "IDLE")
+            )
+            task.wait(0.5)
+        end
+    end)
+    local statusFrame = Instance.new("Frame")
+    statusFrame.Size = UDim2.new(1, 0, 0, 26)
+    statusFrame.Position = UDim2.new(0, 0, 1, -26)
+    statusFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
+    statusFrame.BorderSizePixel = 0
+    statusFrame.Parent = MainFrame
+    Instance.new("UICorner", statusFrame).CornerRadius = UDim.new(0, 0, 12, 12)
+    local dot = Instance.new("Frame")
+    dot.Size = UDim2.new(0, 6, 0, 6)
+    dot.Position = UDim2.new(0, 10, 0.5, -3)
+    dot.BackgroundColor3 = Color3.fromRGB(80, 80, 95)
+    dot.BorderSizePixel = 0
+    dot.Parent = statusFrame
+    Instance.new("UICorner", dot).CornerRadius = UDim.new(1, 0)
+    local statusText = Instance.new("TextLabel")
+    statusText.Size = UDim2.new(1, -24, 1, 0)
+    statusText.Position = UDim2.new(0, 22, 0, 0)
+    statusText.BackgroundTransparency = 1
+    statusText.Text = "IDLE"
+    statusText.TextColor3 = Color3.fromRGB(80, 80, 95)
+    statusText.Font = Enum.Font.GothamBold
+    statusText.TextSize = 8
+    statusText.TextXAlignment = Enum.TextXAlignment.Left
+    statusText.Parent = statusFrame
+    task.spawn(function()
+        while ScreenGui and ScreenGui.Parent do
+            if Config.KillAll and isKiller then
+                statusText.Text = "KILLING"
+                statusText.TextColor3 = Color3.fromRGB(255, 50, 50)
+                dot.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+            elseif isFarming then
+                statusText.Text = "FARMING"
+                statusText.TextColor3 = Color3.fromRGB(255, 200, 80)
+                dot.BackgroundColor3 = Color3.fromRGB(255, 200, 80)
+            else
+                statusText.Text = "IDLE"
+                statusText.TextColor3 = Color3.fromRGB(80, 80, 95)
+                dot.BackgroundColor3 = Color3.fromRGB(80, 80, 95)
+            end
+            task.wait(0.3)
+        end
+    end)
+    local function MinimizeUI()
+        if isMinimized then return end
+        isMinimized = true
+        TweenService:Create(MinimizeBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1, TextTransparency = 1}):Play()
+        TweenService:Create(MainFrame, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1}):Play()
+        task.wait(0.25)
+        MainFrame.Visible = false
+        RestoreBtn.Visible = true
+        TweenService:Create(RestoreBtn, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 44, 0, 44), BackgroundTransparency = 0, TextTransparency = 0}):Play()
+    end
+    local function RestoreUI()
+        if not isMinimized then return end
+        isMinimized = false
+        TweenService:Create(RestoreBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1, TextTransparency = 1}):Play()
+        task.wait(0.2)
+        RestoreBtn.Visible = false
+        MainFrame.Visible = true
+        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 300, 0, 580), BackgroundTransparency = 0}):Play()
+        task.wait(0.15)
+        TweenService:Create(MinimizeBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 28, 0, 28), BackgroundTransparency = 0, TextTransparency = 0}):Play()
+    end
+    MinimizeBtn.MouseButton1Click:Connect(MinimizeUI)
+    RestoreBtn.MouseButton1Click:Connect(RestoreUI)
+    MinimizeBtn.MouseEnter:Connect(function()
+        TweenService:Create(MinimizeBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(50, 50, 65), Size = UDim2.new(0, 30, 0, 30)}):Play()
+    end)
+    MinimizeBtn.MouseLeave:Connect(function()
+        TweenService:Create(MinimizeBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(30, 30, 40), Size = UDim2.new(0, 28, 0, 28)}):Play()
+    end)
+    RestoreBtn.MouseEnter:Connect(function()
+        TweenService:Create(RestoreBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(30, 30, 45), Size = UDim2.new(0, 48, 0, 48)}):Play()
+    end)
+    RestoreBtn.MouseLeave:Connect(function()
+        TweenService:Create(RestoreBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(10, 10, 16), Size = UDim2.new(0, 44, 0, 44)}):Play()
+    end)
+    local dragging = false
+    local dragStart = nil
+    local startPos = nil
+    
+    TitleBar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 and not isMinimized then
+            dragging = true
+            dragStart = input.Position
+            startPos = MainFrame.Position
+        end
+    end)
+    
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement and not isMinimized then
+            local delta = input.Position - dragStart
+            MainFrame.Position = UDim2.new(0, startPos.X.Offset + delta.X, 0, startPos.Y.Offset + delta.Y)
+            RestoreBtn.Position = MainFrame.Position
+        end
+    end)
+    
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
+    local dragRestore = false
+    local dragStartR = nil
+    local startPosR = nil
+    RestoreBtn.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 and isMinimized then
+            dragRestore = true
+            dragStartR = input.Position
+            startPosR = RestoreBtn.Position
+        end
+    end)
+    UserInputService.InputChanged:Connect(function(input)
+        if dragRestore and input.UserInputType == Enum.UserInputType.MouseMovement and isMinimized then
+            local delta = input.Position - dragStartR
+            RestoreBtn.Position = UDim2.new(0, startPosR.X.Offset + delta.X, 0, startPosR.Y.Offset + delta.Y)
+            MainFrame.Position = RestoreBtn.Position
+        end
+    end)
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragRestore = false
+        end
+    end)
+    local uiVisible = true
+    UserInputService.InputBegan:Connect(function(input, gameProcessed)
+        if not gameProcessed and input.KeyCode == Config.ToggleKey then
+            uiVisible = not uiVisible
+            if uiVisible then
+                if isMinimized then
+                    RestoreBtn.Visible = true
+                else
+                    MainFrame.Visible = true
+                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {BackgroundTransparency = 0}):Play()
+                end
+            else
+                if isMinimized then
+                    RestoreBtn.Visible = false
+                else
+                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+                    task.wait(0.3)
+                    MainFrame.Visible = false
+                end
+            end
+        end
+    end)
+    TweenService:Create(MainFrame, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 300, 0, 580), BackgroundTransparency = 0}):Play()
+    task.wait(0.25)
+    TweenService:Create(MinimizeBtn, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 28, 0, 28), BackgroundTransparency = 0, TextTransparency = 0}):Play()
+end
+pcall(function()
+    LocalPlayer.Idled:Connect(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+end)
+LocalPlayer.CharacterAdded:Connect(function(character)
+    if Config.Stealth then
+        task.delay(1, function() EnableStealth() end)
+    end
+    isKiller = false
+    currentTarget = nil
+end)
+CreateUI()
+if Config.AutoFarm then
+    task.spawn(function()
+        local character = LocalPlayer.Character
+        while not character or not character.Parent do
+            task.wait(0.5)
+            character = LocalPlayer.Character
+        end
+        task.wait(2)
+        if not isFarming then
+            StartFarm()
+        end
+    end)
+end
+if Config.KillAll then
+    task.spawn(function()
+        task.wait(3)
+        KillAllLoop()
+    end)
+end
+if Config.AntiAfk then
+    task.spawn(function()
+        task.wait(3)
+        AntiAfkLoop()
+    end)
+end
