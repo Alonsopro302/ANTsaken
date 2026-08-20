@@ -6,8 +6,10 @@ local UserInputService = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local VirtualUser = game:GetService("VirtualUser")
+
 local LocalPlayer = Players.LocalPlayer
 local u15 = {}
+
 local Config = {
     AutoFarm = false,
     Stealth = false,
@@ -20,8 +22,8 @@ local Config = {
     KillAllCooldown = 0.2,
     AuraRange = 20,
     AntiAfk = false,
-    AntiAfkInterval = 3,
 }
+
 local Stats = {
     Fixed = 0,
     Puzzles = 0,
@@ -29,6 +31,7 @@ local Stats = {
     StartTime = os.clock(),
     Kills = 0,
 }
+
 local isFarming = false
 local isWaiting = false
 local elapsed = os.clock()
@@ -38,7 +41,7 @@ local killAllConnection = nil
 local lastAttackTime = 0
 local isMinimized = false
 local antiAfkConnection = nil
-local lastAntiAfk = 0
+
 pcall(function()
     if isfile("antsaken_config.json") then
         local data = HttpService:JSONDecode(readfile("antsaken_config.json"))
@@ -51,12 +54,13 @@ pcall(function()
         end
     end
 end)
+
 local function AntiAfkLoop()
     if antiAfkConnection then
         antiAfkConnection:Disconnect()
         antiAfkConnection = nil
     end
-    lastAntiAfk = os.clock()
+
     antiAfkConnection = RunService.Heartbeat:Connect(function()
         if not Config.AntiAfk then
             if antiAfkConnection then
@@ -65,21 +69,23 @@ local function AntiAfkLoop()
             end
             return
         end
-        if os.clock() - lastAntiAfk < Config.AntiAfkInterval then return end
-        lastAntiAfk = os.clock()
+
         if not LocalPlayer.Character then return end
         local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
         if not humanoid then return end
         local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         if not rootPart then return end
-        local randomX = math.random(-15, 15)
-        local randomZ = math.random(-15, 15)
+
+        local randomX = math.random(-20, 20)
+        local randomZ = math.random(-20, 20)
         local randomPos = rootPart.Position + Vector3.new(randomX, 0, randomZ)
+        
         humanoid:MoveTo(randomPos)
         VirtualUser:CaptureController()
         VirtualUser:ClickButton2(Vector2.new())
     end)
 end
+
 local function GetAliveSurvivors()
     local survivors = {}
     local playersContainer = workspace:FindFirstChild("Players")
@@ -110,6 +116,7 @@ local function GetAliveSurvivors()
     table.sort(survivors, function(a, b) return a.Distance < b.Distance end)
     return survivors
 end
+
 local function CheckIsKiller()
     local playersContainer = workspace:FindFirstChild("Players")
     if not playersContainer then return false end
@@ -122,6 +129,7 @@ local function CheckIsKiller()
     end
     return false
 end
+
 local function GetKillerAttackAbility()
     if not LocalPlayer.Character then return "Slash" end
     local charName = LocalPlayer.Character.Name
@@ -132,6 +140,7 @@ local function GetKillerAttackAbility()
     if charName == "Guest1337" then return "Punch" end
     return "Slash"
 end
+
 local function AttackSurvivor()
     local currentTime = os.clock()
     if currentTime - lastAttackTime < Config.KillAllCooldown then return false end
@@ -162,6 +171,7 @@ local function AttackSurvivor()
     end
     return success
 end
+
 local function TeleportBehindSurvivor(target)
     if not target or not target.RootPart then return false end
     if not LocalPlayer.Character then return false end
@@ -172,6 +182,7 @@ local function TeleportBehindSurvivor(target)
     rootPart.CFrame = CFrame.new(behindPos, target.RootPart.Position)
     return true
 end
+
 local function FlyToSurvivor(target)
     if not target or not target.RootPart then return false end
     if not LocalPlayer.Character then return false end
@@ -184,6 +195,7 @@ local function FlyToSurvivor(target)
     humanoid:MoveTo(moveToPos)
     return true
 end
+
 local function KillAllLoop()
     if killAllConnection then
         killAllConnection:Disconnect()
@@ -234,6 +246,7 @@ local function KillAllLoop()
         end
     end)
 end
+
 local function GetGenerators()
     local gens = {}
     local map = workspace:FindFirstChild("Map")
@@ -289,6 +302,7 @@ local function GetGenerators()
     end
     return gens
 end
+
 local function FixGenerator(gen)
     if not gen.Model or not gen.Model.Parent then return false end
     if gen.Progress.Value >= 100 then return true end
@@ -307,6 +321,7 @@ local function FixGenerator(gen)
     elapsed = os.clock()
     return true
 end
+
 local function AutoSwitchSurvivor()
     if not Config.AutoSwitchSurvivor then return end
     pcall(function()
@@ -345,6 +360,7 @@ local function AutoSwitchSurvivor()
         end
     end)
 end
+
 local function StartFarm()
     if isFarming then return end
     isFarming = true
@@ -422,11 +438,13 @@ local function StartFarm()
     end
     if deathConnection then deathConnection:Disconnect() end
 end
+
 local hiddenGuis = {}
 local hiddenProperties = {}
 local stealthConnection = nil
 local walkSpeed = nil
 local maxSlopeAngle = nil
+
 function EnableStealth()
     Config.Stealth = true
     local character = LocalPlayer.Character
@@ -461,16 +479,17 @@ function EnableStealth()
         end
     end)
     pcall(function()
-        setsimulationradius(100)  -- ✅ ARREGLADO: antes era 0 (rompía todo)
+        setsimulationradius(0)
         if sethiddenproperty then
-            sethiddenproperty(LocalPlayer, "MaximumSimulationRadius", 100)  -- ✅ ARREGLADO
+            sethiddenproperty(LocalPlayer, "MaximumSimulationRadius", 0)
         end
     end)
     if stealthConnection then stealthConnection:Disconnect() end
     stealthConnection = RunService.Heartbeat:Connect(function()
-        if Config.Stealth then pcall(function() setsimulationradius(100) end) end  -- ✅ ARREGLADO
+        if Config.Stealth then pcall(function() setsimulationradius(0) end) end
     end)
 end
+
 function DisableStealth()
     Config.Stealth = false
     pcall(function()
@@ -501,17 +520,20 @@ function DisableStealth()
         stealthConnection = nil
     end
 end
+
 local function CreateUI()
     if LocalPlayer.PlayerGui:FindFirstChild("AntSakenAutoFarm") then
         LocalPlayer.PlayerGui.AntSakenAutoFarm:Destroy()
     end
+
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "AntSakenAutoFarm"
     ScreenGui.ResetOnSpawn = false
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.Parent = LocalPlayer.PlayerGui
+
     local MainFrame = Instance.new("Frame")
-    MainFrame.Size = UDim2.new(0, 0, 0, 0)
+    MainFrame.Size = UDim2.new(0, 300, 0, 580)
     MainFrame.Position = UDim2.new(0.5, -150, 0.5, -290)
     MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
     MainFrame.BackgroundTransparency = 0
@@ -521,11 +543,13 @@ local function CreateUI()
     local Stroke = Instance.new("UIStroke", MainFrame)
     Stroke.Color = Color3.fromRGB(40, 40, 55)
     Stroke.Thickness = 1
+
     local TitleBar = Instance.new("Frame")
     TitleBar.Size = UDim2.new(1, 0, 0, 36)
     TitleBar.Position = UDim2.new(0, 0, 0, 0)
     TitleBar.BackgroundTransparency = 1
     TitleBar.Parent = MainFrame
+
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(0.7, 0, 1, 0)
     Title.Position = UDim2.new(0, 12, 0, 0)
@@ -536,8 +560,9 @@ local function CreateUI()
     Title.TextSize = 14
     Title.TextXAlignment = Enum.TextXAlignment.Left
     Title.Parent = TitleBar
+
     local MinimizeBtn = Instance.new("TextButton")
-    MinimizeBtn.Size = UDim2.new(0, 0, 0, 0)
+    MinimizeBtn.Size = UDim2.new(0, 28, 0, 28)
     MinimizeBtn.Position = UDim2.new(1, -36, 0.5, -14)
     MinimizeBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
     MinimizeBtn.Text = "−"
@@ -548,9 +573,10 @@ local function CreateUI()
     MinimizeBtn.AutoButtonColor = false
     MinimizeBtn.Parent = TitleBar
     Instance.new("UICorner", MinimizeBtn).CornerRadius = UDim.new(1, 0)
+
     local RestoreBtn = Instance.new("TextButton")
-    RestoreBtn.Size = UDim2.new(0, 0, 0, 0)
-    RestoreBtn.Position = MainFrame.Position
+    RestoreBtn.Size = UDim2.new(0, 44, 0, 44)
+    RestoreBtn.Position = UDim2.new(0.5, -22, 0.5, -22)
     RestoreBtn.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
     RestoreBtn.Text = "+"
     RestoreBtn.TextColor3 = Color3.fromRGB(200, 200, 210)
@@ -564,22 +590,25 @@ local function CreateUI()
     local RestoreStroke = Instance.new("UIStroke", RestoreBtn)
     RestoreStroke.Color = Color3.fromRGB(40, 40, 55)
     RestoreStroke.Thickness = 1
+
     local Credit = Instance.new("TextLabel")
     Credit.Size = UDim2.new(1, 0, 0, 18)
     Credit.Position = UDim2.new(0, 0, 0, 36)
     Credit.BackgroundTransparency = 1
-    Credit.Text = "Made by Pichigdasos (Original: Ant W Ant)"
+    Credit.Text = "Made by Pichigdasos (Original: Ant W Ant❤️‍🩹)"
     Credit.TextColor3 = Color3.fromRGB(180, 180, 200)
     Credit.Font = Enum.Font.Gotham
     Credit.TextSize = 9
     Credit.TextTransparency = 0.4
     Credit.Parent = MainFrame
+
     local Sep = Instance.new("Frame")
     Sep.Size = UDim2.new(0.9, 0, 0, 1)
     Sep.Position = UDim2.new(0.05, 0, 0, 56)
     Sep.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
     Sep.BorderSizePixel = 0
     Sep.Parent = MainFrame
+
     local Scroll = Instance.new("ScrollingFrame")
     Scroll.Size = UDim2.new(1, -10, 1, -72)
     Scroll.Position = UDim2.new(0, 5, 0, 60)
@@ -590,9 +619,11 @@ local function CreateUI()
     Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
     Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
     Scroll.Parent = MainFrame
+
     local Layout = Instance.new("UIListLayout", Scroll)
     Layout.Padding = UDim.new(0, 4)
     Layout.SortOrder = Enum.SortOrder.LayoutOrder
+
     local function AddToggle(label, configKey, onChange, tooltip)
         local frame = Instance.new("Frame")
         frame.Size = UDim2.new(1, 0, 0, 32)
@@ -600,6 +631,7 @@ local function CreateUI()
         frame.BorderSizePixel = 0
         frame.Parent = Scroll
         Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 6)
+
         local labelText = Instance.new("TextLabel")
         labelText.Size = UDim2.new(1, -60, 1, 0)
         labelText.Position = UDim2.new(0, 10, 0, 0)
@@ -610,6 +642,7 @@ local function CreateUI()
         labelText.TextSize = 10
         labelText.TextXAlignment = Enum.TextXAlignment.Left
         labelText.Parent = frame
+
         local toggleBtn = Instance.new("TextButton")
         toggleBtn.Size = UDim2.new(0, 44, 0, 20)
         toggleBtn.Position = UDim2.new(1, -52, 0.5, -10)
@@ -619,6 +652,7 @@ local function CreateUI()
         toggleBtn.AutoButtonColor = false
         toggleBtn.Parent = frame
         Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(1, 0)
+
         local knob = Instance.new("Frame")
         knob.Size = UDim2.new(0, 14, 0, 14)
         knob.Position = Config[configKey] and UDim2.new(1, -18, 0.5, -7) or UDim2.new(0, 3, 0.5, -7)
@@ -626,6 +660,7 @@ local function CreateUI()
         knob.BorderSizePixel = 0
         knob.Parent = toggleBtn
         Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
+
         if tooltip then
             local tooltipLabel = Instance.new("TextLabel")
             tooltipLabel.Size = UDim2.new(1, 0, 0, 14)
@@ -638,6 +673,7 @@ local function CreateUI()
             tooltipLabel.TextXAlignment = Enum.TextXAlignment.Left
             tooltipLabel.Visible = false
             tooltipLabel.Parent = frame
+
             frame.MouseEnter:Connect(function()
                 tooltipLabel.Visible = true
             end)
@@ -645,6 +681,7 @@ local function CreateUI()
                 tooltipLabel.Visible = false
             end)
         end
+
         local function updateToggle(value)
             Config[configKey] = value
             TweenService:Create(toggleBtn, TweenInfo.new(0.15), {
@@ -659,9 +696,11 @@ local function CreateUI()
                 writefile("antsaken_config.json", HttpService:JSONEncode(Config))
             end)
         end
+
         toggleBtn.MouseButton1Click:Connect(function()
             updateToggle(not Config[configKey])
         end)
+
         toggleBtn.MouseEnter:Connect(function()
             TweenService:Create(toggleBtn, TweenInfo.new(0.1), {
                 BackgroundColor3 = Config[configKey] and Color3.fromRGB(120, 220, 255) or Color3.fromRGB(45, 45, 55)
@@ -672,8 +711,10 @@ local function CreateUI()
                 BackgroundColor3 = Config[configKey] and Color3.fromRGB(100, 200, 255) or Color3.fromRGB(35, 35, 45)
             }):Play()
         end)
+
         return updateToggle
     end
+
     local function AddButton(label, callback, color, tooltip)
         local btn = Instance.new("TextButton")
         btn.Size = UDim2.new(1, 0, 0, 28)
@@ -686,6 +727,7 @@ local function CreateUI()
         btn.AutoButtonColor = false
         btn.Parent = Scroll
         Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+
         if tooltip then
             local tooltipLabel = Instance.new("TextLabel")
             tooltipLabel.Size = UDim2.new(1, 0, 0, 14)
@@ -698,6 +740,7 @@ local function CreateUI()
             tooltipLabel.TextXAlignment = Enum.TextXAlignment.Left
             tooltipLabel.Visible = false
             tooltipLabel.Parent = btn
+
             btn.MouseEnter:Connect(function()
                 tooltipLabel.Visible = true
             end)
@@ -705,6 +748,7 @@ local function CreateUI()
                 tooltipLabel.Visible = false
             end)
         end
+
         btn.MouseButton1Click:Connect(callback)
         btn.MouseEnter:Connect(function()
             TweenService:Create(btn, TweenInfo.new(0.15), {
@@ -717,6 +761,7 @@ local function CreateUI()
             }):Play()
         end)
     end
+
     local function AddSection(title)
         local frame = Instance.new("Frame")
         frame.Size = UDim2.new(1, 0, 0, 20)
@@ -732,6 +777,7 @@ local function CreateUI()
         label.TextXAlignment = Enum.TextXAlignment.Left
         label.Parent = frame
     end
+
     AddSection("SURVIVOR CONTROLS")
     AddToggle("Auto Farm", "AutoFarm", function(value)
         if value then
@@ -746,6 +792,7 @@ local function CreateUI()
     AddToggle("Stealth Mode", "Stealth", function(value)
         if value then EnableStealth() else DisableStealth() end
     end, "Hides UI elements and reduces visibility")
+
     AddSection("KILL ALL")
     AddToggle("Kill All", "KillAll", function(value)
         if value then
@@ -764,6 +811,7 @@ local function CreateUI()
     end, "Hunt and kill survivors automatically")
     AddToggle("Teleport Mode", "KillAllTeleport", nil, "Teleport behind survivors")
     AddToggle("Fly Mode", "KillAllFly", nil, "Fly towards survivors")
+
     AddSection("KILL ALL SETTINGS")
     
     local cooldownFrame = Instance.new("Frame")
@@ -771,6 +819,7 @@ local function CreateUI()
     cooldownFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
     cooldownFrame.Parent = Scroll
     Instance.new("UICorner", cooldownFrame).CornerRadius = UDim.new(0, 6)
+
     local cooldownLabel = Instance.new("TextLabel")
     cooldownLabel.Size = UDim2.new(0.6, 0, 1, 0)
     cooldownLabel.Position = UDim2.new(0, 10, 0, 0)
@@ -781,6 +830,7 @@ local function CreateUI()
     cooldownLabel.TextSize = 9
     cooldownLabel.TextXAlignment = Enum.TextXAlignment.Left
     cooldownLabel.Parent = cooldownFrame
+
     local cooldownValue = Instance.new("TextLabel")
     cooldownValue.Size = UDim2.new(0.3, 0, 1, 0)
     cooldownValue.Position = UDim2.new(0.7, 0, 0, 0)
@@ -791,11 +841,13 @@ local function CreateUI()
     cooldownValue.TextSize = 9
     cooldownValue.TextXAlignment = Enum.TextXAlignment.Right
     cooldownValue.Parent = cooldownFrame
+
     local rangeFrame = Instance.new("Frame")
     rangeFrame.Size = UDim2.new(1, 0, 0, 28)
     rangeFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
     rangeFrame.Parent = Scroll
     Instance.new("UICorner", rangeFrame).CornerRadius = UDim.new(0, 6)
+
     local rangeLabel = Instance.new("TextLabel")
     rangeLabel.Size = UDim2.new(0.6, 0, 1, 0)
     rangeLabel.Position = UDim2.new(0, 10, 0, 0)
@@ -806,16 +858,18 @@ local function CreateUI()
     rangeLabel.TextSize = 9
     rangeLabel.TextXAlignment = Enum.TextXAlignment.Left
     rangeLabel.Parent = rangeFrame
+
     local rangeValue = Instance.new("TextLabel")
     rangeValue.Size = UDim2.new(0.3, 0, 1, 0)
     rangeValue.Position = UDim2.new(0.7, 0, 0, 0)
     rangeValue.BackgroundTransparency = 1
-    rangeValue.Text = tostring(Config.AuraRange) .. " u"
+    rangeValue.Text = tostring(Config.AuraRange) .. "s"
     rangeValue.TextColor3 = Color3.fromRGB(255, 200, 80)
     rangeValue.Font = Enum.Font.GothamBold
     rangeValue.TextSize = 9
     rangeValue.TextXAlignment = Enum.TextXAlignment.Right
     rangeValue.Parent = rangeFrame
+
     AddSection("UTILITIES")
     AddToggle("Anti AFK Bypass", "AntiAfk", function(value)
         if value then
@@ -826,17 +880,17 @@ local function CreateUI()
                 antiAfkConnection = nil
             end
         end
-    end, "Moves character every 3 seconds to avoid AFK kick")
+    end, "Moves character randomly every 10 seconds to avoid AFK kick")
+
     AddSection("ACTIONS")
     AddButton("Unload Script", function()
         isFarming = false
         if killAllConnection then killAllConnection:Disconnect(); killAllConnection = nil end
         if antiAfkConnection then antiAfkConnection:Disconnect(); antiAfkConnection = nil end
         pcall(function() writefile("antsaken_config.json", HttpService:JSONEncode(Config)) end)
-        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1}):Play()
-        task.wait(0.35)
         ScreenGui:Destroy()
     end, Color3.fromRGB(32, 18, 18), "Remove script from game")
+
     AddSection("STATS")
     local statsLabel = Instance.new("TextLabel")
     statsLabel.Size = UDim2.new(1, 0, 0, 75)
@@ -852,8 +906,9 @@ local function CreateUI()
     statsLabel.BackgroundTransparency = 0
     statsLabel.Padding = UDim.new(0, 8)
     statsLabel.Text = ""
+
     task.spawn(function()
-        while ScreenGui and ScreenGui.Parent do
+        while ScreenGui.Parent do
             local elapsed2 = os.clock() - Stats.StartTime
             local mins = math.floor(elapsed2 / 60)
             local secs = math.floor(elapsed2 % 60)
@@ -871,6 +926,7 @@ local function CreateUI()
             task.wait(0.5)
         end
     end)
+
     local statusFrame = Instance.new("Frame")
     statusFrame.Size = UDim2.new(1, 0, 0, 26)
     statusFrame.Position = UDim2.new(0, 0, 1, -26)
@@ -878,6 +934,7 @@ local function CreateUI()
     statusFrame.BorderSizePixel = 0
     statusFrame.Parent = MainFrame
     Instance.new("UICorner", statusFrame).CornerRadius = UDim.new(0, 0, 12, 12)
+
     local dot = Instance.new("Frame")
     dot.Size = UDim2.new(0, 6, 0, 6)
     dot.Position = UDim2.new(0, 10, 0.5, -3)
@@ -885,6 +942,7 @@ local function CreateUI()
     dot.BorderSizePixel = 0
     dot.Parent = statusFrame
     Instance.new("UICorner", dot).CornerRadius = UDim.new(1, 0)
+
     local statusText = Instance.new("TextLabel")
     statusText.Size = UDim2.new(1, -24, 1, 0)
     statusText.Position = UDim2.new(0, 22, 0, 0)
@@ -895,8 +953,9 @@ local function CreateUI()
     statusText.TextSize = 8
     statusText.TextXAlignment = Enum.TextXAlignment.Left
     statusText.Parent = statusFrame
+
     task.spawn(function()
-        while ScreenGui and ScreenGui.Parent do
+        while ScreenGui.Parent do
             if Config.KillAll and isKiller then
                 statusText.Text = "KILLING"
                 statusText.TextColor3 = Color3.fromRGB(255, 50, 50)
@@ -913,41 +972,38 @@ local function CreateUI()
             task.wait(0.3)
         end
     end)
+
     local function MinimizeUI()
         if isMinimized then return end
         isMinimized = true
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1, TextTransparency = 1}):Play()
-        TweenService:Create(MainFrame, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1}):Play()
-        task.wait(0.25)
         MainFrame.Visible = false
         RestoreBtn.Visible = true
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 44, 0, 44), BackgroundTransparency = 0, TextTransparency = 0}):Play()
+        RestoreBtn.Position = MainFrame.Position
+        RestoreBtn.Size = UDim2.new(0, 44, 0, 44)
+        RestoreBtn.BackgroundTransparency = 0
+        TweenService:Create(RestoreBtn, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+            Size = UDim2.new(0, 50, 0, 50)
+        }):Play()
     end
+
     local function RestoreUI()
         if not isMinimized then return end
         isMinimized = false
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1, TextTransparency = 1}):Play()
+        TweenService:Create(RestoreBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In), {
+            Size = UDim2.new(0, 0, 0, 0)
+        }):Play()
         task.wait(0.2)
         RestoreBtn.Visible = false
         MainFrame.Visible = true
-        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 300, 0, 580), BackgroundTransparency = 0}):Play()
-        task.wait(0.15)
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 28, 0, 28), BackgroundTransparency = 0, TextTransparency = 0}):Play()
+        MainFrame.Size = UDim2.new(0, 300, 0, 580)
+        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+            Size = UDim2.new(0, 300, 0, 580)
+        }):Play()
     end
+
     MinimizeBtn.MouseButton1Click:Connect(MinimizeUI)
     RestoreBtn.MouseButton1Click:Connect(RestoreUI)
-    MinimizeBtn.MouseEnter:Connect(function()
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(50, 50, 65), Size = UDim2.new(0, 30, 0, 30)}):Play()
-    end)
-    MinimizeBtn.MouseLeave:Connect(function()
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(30, 30, 40), Size = UDim2.new(0, 28, 0, 28)}):Play()
-    end)
-    RestoreBtn.MouseEnter:Connect(function()
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(30, 30, 45), Size = UDim2.new(0, 48, 0, 48)}):Play()
-    end)
-    RestoreBtn.MouseLeave:Connect(function()
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(10, 10, 16), Size = UDim2.new(0, 44, 0, 44)}):Play()
-    end)
+
     local dragging = false
     local dragStart = nil
     local startPos = nil
@@ -973,28 +1029,7 @@ local function CreateUI()
             dragging = false
         end
     end)
-    local dragRestore = false
-    local dragStartR = nil
-    local startPosR = nil
-    RestoreBtn.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 and isMinimized then
-            dragRestore = true
-            dragStartR = input.Position
-            startPosR = RestoreBtn.Position
-        end
-    end)
-    UserInputService.InputChanged:Connect(function(input)
-        if dragRestore and input.UserInputType == Enum.UserInputType.MouseMovement and isMinimized then
-            local delta = input.Position - dragStartR
-            RestoreBtn.Position = UDim2.new(0, startPosR.X.Offset + delta.X, 0, startPosR.Y.Offset + delta.Y)
-            MainFrame.Position = RestoreBtn.Position
-        end
-    end)
-    UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragRestore = false
-        end
-    end)
+
     local uiVisible = true
     UserInputService.InputBegan:Connect(function(input, gameProcessed)
         if not gameProcessed and input.KeyCode == Config.ToggleKey then
@@ -1004,29 +1039,32 @@ local function CreateUI()
                     RestoreBtn.Visible = true
                 else
                     MainFrame.Visible = true
-                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {BackgroundTransparency = 0}):Play()
+                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {
+                        BackgroundTransparency = 0
+                    }):Play()
                 end
             else
                 if isMinimized then
                     RestoreBtn.Visible = false
                 else
-                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {
+                        BackgroundTransparency = 1
+                    }):Play()
                     task.wait(0.3)
                     MainFrame.Visible = false
                 end
             end
         end
     end)
-    TweenService:Create(MainFrame, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 300, 0, 580), BackgroundTransparency = 0}):Play()
-    task.wait(0.25)
-    TweenService:Create(MinimizeBtn, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 28, 0, 28), BackgroundTransparency = 0, TextTransparency = 0}):Play()
 end
+
 pcall(function()
     LocalPlayer.Idled:Connect(function()
         VirtualUser:CaptureController()
         VirtualUser:ClickButton2(Vector2.new())
     end)
 end)
+
 LocalPlayer.CharacterAdded:Connect(function(character)
     if Config.Stealth then
         task.delay(1, function() EnableStealth() end)
@@ -1034,7 +1072,9 @@ LocalPlayer.CharacterAdded:Connect(function(character)
     isKiller = false
     currentTarget = nil
 end)
+
 CreateUI()
+
 if Config.AutoFarm then
     task.spawn(function()
         local character = LocalPlayer.Character
@@ -1048,12 +1088,14 @@ if Config.AutoFarm then
         end
     end)
 end
+
 if Config.KillAll then
     task.spawn(function()
         task.wait(3)
         KillAllLoop()
     end)
 end
+
 if Config.AntiAfk then
     task.spawn(function()
         task.wait(3)
