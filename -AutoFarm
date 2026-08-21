@@ -6,8 +6,14 @@ local UserInputService = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local VirtualUser = game:GetService("VirtualUser")
+local ContextActionService = game:GetService("ContextActionService")
+
 local LocalPlayer = Players.LocalPlayer
-local u15 = {}
+local v9 = getgenv and getgenv().AntsakenRecentServers or {}
+local v10 = getgenv and getgenv().AntsakenBadServers or {}
+local u13 = nil
+local u15 = v10
+
 local Config = {
     AutoFarm = false,
     Stealth = false,
@@ -19,16 +25,23 @@ local Config = {
     KillAllFly = false,
     KillAllCooldown = 0.2,
     AuraRange = 20,
-    AntiAfk = false,
-    AntiAfkInterval = 3,
+    MinPlayers = 4,
+    MaxPlayers = 8,
+    PreferNewServer = true,
+    MinServerAge = 20,
+    MaxHopsPerHour = 15,
 }
+
 local Stats = {
     Fixed = 0,
     Puzzles = 0,
     Hops = 0,
     StartTime = os.clock(),
     Kills = 0,
+    HopsThisHour = 0,
+    LastHopTime = 0,
 }
+
 local isFarming = false
 local isWaiting = false
 local elapsed = os.clock()
@@ -36,9 +49,8 @@ local currentTarget = nil
 local isKiller = false
 local killAllConnection = nil
 local lastAttackTime = 0
-local isMinimized = false
-local antiAfkConnection = nil
-local lastAntiAfk = 0
+local PcModeActive = false
+
 pcall(function()
     if isfile("antsaken_config.json") then
         local data = HttpService:JSONDecode(readfile("antsaken_config.json"))
@@ -51,41 +63,211 @@ pcall(function()
         end
     end
 end)
-local function AntiAfkLoop()
-    if antiAfkConnection then
-        antiAfkConnection:Disconnect()
-        antiAfkConnection = nil
-    end
-    lastAntiAfk = os.clock()
-    antiAfkConnection = RunService.Heartbeat:Connect(function()
-        if not Config.AntiAfk then
-            if antiAfkConnection then
-                antiAfkConnection:Disconnect()
-                antiAfkConnection = nil
-            end
-            return
+
+local function ActivatePcMode()
+    if PcModeActive then return end
+    PcModeActive = true
+    
+    local function SimulateKeyPress(key)
+        local keyCode = Enum.KeyCode[key]
+        if keyCode then
+            ContextActionService:BindAction("PcMode_" .. key, function(actionName, inputState, inputObject)
+                if inputState == Enum.UserInputState.Begin then
+                    return Enum.ContextActionResult.Sink
+                end
+                return Enum.ContextActionResult.Pass
+            end, false, keyCode)
+            task.wait(0.05)
+            ContextActionService:UnbindAction("PcMode_" .. key)
         end
-        if os.clock() - lastAntiAfk < Config.AntiAfkInterval then return end
-        lastAntiAfk = os.clock()
-        if not LocalPlayer.Character then return end
-        local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if not humanoid then return end
-        local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if not rootPart then return end
-        local randomX = math.random(-15, 15)
-        local randomZ = math.random(-15, 15)
-        local randomPos = rootPart.Position + Vector3.new(randomX, 0, randomZ)
-        humanoid:MoveTo(randomPos)
-        VirtualUser:CaptureController()
-        VirtualUser:ClickButton2(Vector2.new())
+    end
+    
+    pcall(function()
+        SimulateKeyPress("Q")
+        task.wait(0.1)
+        SimulateKeyPress("Q")
+        
+        local playerGui = LocalPlayer.PlayerGui
+        if playerGui then
+            for _, gui in ipairs(playerGui:GetChildren()) do
+                if gui:IsA("ScreenGui") then
+                    for _, child in ipairs(gui:GetDescendants()) do
+                        if child:IsA("TextButton") or child:IsA("ImageButton") then
+                            local text = child.Text or child.Name or ""
+                            if text:lower():find("pc") or text:lower():find("keyboard") or 
+                               text:lower():find("modo") or text:lower():find("mobile") then
+                                child:FireServer()
+                                fireclickdetector(child)
+                                return
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        
+        local remoteEvent = ReplicatedStorage:FindFirstChild("Modules")
+        if remoteEvent then
+            local network = remoteEvent:FindFirstChild("Network")
+            if network then
+                local remote = network:FindFirstChild("RemoteEvent")
+                if remote then
+                    remote:FireServer("SetControlMode", "PC")
+                end
+            end
+        end
     end)
 end
+
+local function GetAdvancedServers()
+    local servers = {}
+    local cursor = ""
+    local attempts = 0
+    
+    while attempts < 3 do
+        attempts = attempts + 1
+        local url = string.format(
+            "https://games.roblox.com/v1/games/18687417158/servers/Public?sortOrder=Asc&limit=100&excludeFullServers=true&cursor=%s",
+            cursor
+        )
+        
+        local success, result = pcall(function()
+            return HttpService:JSONDecode(game:HttpGet(url))
+        end)
+        
+        if success and result and result.data then
+            for _, server in ipairs(result.data) do
+                local quality = 100
+                
+                if server.playing <= Config.MinPlayers then
+                    quality = quality + 30
+                elseif server.playing <= Config.MaxPlayers then
+                    quality = quality + 10
+                elseif server.playing > Config.MaxPlayers + 5 then
+                    quality = quality - 20
+                end
+                
+                if server.playing > 0 and server.playing < server.maxPlayers then
+                    quality = quality + 15
+                end
+                
+                if Config.PreferNewServer then
+                    quality = quality + 5
+                end
+                
+                if u15[server.id] then
+                    quality = quality - 50
+                end
+                
+                local isRecent = false
+                for _, id in ipairs(v9) do
+                    if id == server.id then isRecent = true break end
+                end
+                if isRecent then quality = quality - 30 end
+                
+                servers[server.id] = {
+                    id = server.id,
+                    playing = server.playing,
+                    maxPlayers = server.maxPlayers,
+                    quality = math.max(0, math.min(100, quality)),
+                    region = server.region,
+                    ping = server.ping or 0,
+                }
+            end
+            
+            if result.nextPageCursor then
+                cursor = result.nextPageCursor
+            else
+                break
+            end
+        else
+            task.wait(0.5)
+        end
+    end
+    
+    local serverList = {}
+    for id, server in pairs(servers) do
+        if id ~= game.JobId then
+            table.insert(serverList, server)
+        end
+    end
+    
+    table.sort(serverList, function(a, b)
+        return a.quality > b.quality
+    end)
+    
+    return serverList
+end
+
+function ServerHop()
+    if Stats.HopsThisHour >= Config.MaxHopsPerHour then
+        task.wait(60)
+        Stats.HopsThisHour = 0
+        return
+    end
+    
+    Stats.Hops = Stats.Hops + 1
+    Stats.HopsThisHour = Stats.HopsThisHour + 1
+    Stats.LastHopTime = os.time()
+    
+    pcall(function()
+        if getgenv then
+            getgenv().AntsakenAutoExec = true
+            getgenv().AntsakenConfig = Config
+            getgenv().AntsakenStats = Stats
+        end
+    end)
+    
+    local servers = GetAdvancedServers()
+    
+    if #servers == 0 then
+        task.delay(5, ServerHop)
+        return
+    end
+    
+    local bestServer = servers[1]
+    
+    if bestServer.quality < 30 then
+        task.wait(10)
+        ServerHop()
+        return
+    end
+    
+    u13 = bestServer.id
+    table.insert(v9, bestServer.id)
+    if #v9 > 10 then table.remove(v9, 1) end
+    pcall(function() getgenv().AntsakenRecentServers = v9 end)
+    
+    local success, err = pcall(function()
+        TeleportService:TeleportToPlaceInstance(18687417158, bestServer.id, LocalPlayer)
+    end)
+    
+    if not success then
+        u15[bestServer.id] = true
+        pcall(function() getgenv().AntsakenBadServers = u15 end)
+        task.delay(3, ServerHop)
+    end
+end
+
+local function GetKillerAttackAbility()
+    if not LocalPlayer.Character then return "Slash" end
+    local charName = LocalPlayer.Character.Name
+    if charName == "Noli" then return "Stab" end
+    if charName == "c001kidd" then return "Punch" end
+    if charName == "1x1x1x1" then return "Slash" end
+    if charName == "Slasher" then return "Slash" end
+    if charName == "Guest1337" then return "Punch" end
+    return "Slash"
+end
+
 local function GetAliveSurvivors()
     local survivors = {}
     local playersContainer = workspace:FindFirstChild("Players")
     if not playersContainer then return survivors end
+    
     local survivorsGroup = playersContainer:FindFirstChild("Survivors")
     if not survivorsGroup then return survivors end
+    
     for _, child in ipairs(survivorsGroup:GetChildren()) do
         if child:IsA("Model") then
             local humanoid = child:FindFirstChildOfClass("Humanoid")
@@ -107,14 +289,18 @@ local function GetAliveSurvivors()
             end
         end
     end
+    
     table.sort(survivors, function(a, b) return a.Distance < b.Distance end)
     return survivors
 end
+
 local function CheckIsKiller()
     local playersContainer = workspace:FindFirstChild("Players")
     if not playersContainer then return false end
+    
     local killersGroup = playersContainer:FindFirstChild("Killers")
     if not killersGroup then return false end
+    
     for _, child in ipairs(killersGroup:GetChildren()) do
         if child:IsA("Model") and child:GetAttribute("Username") == LocalPlayer.Name then
             return true
@@ -122,33 +308,56 @@ local function CheckIsKiller()
     end
     return false
 end
-local function GetKillerAttackAbility()
-    if not LocalPlayer.Character then return "Slash" end
-    local charName = LocalPlayer.Character.Name
-    if charName == "Noli" then return "Stab" end
-    if charName == "c001kidd" then return "Punch" end
-    if charName == "1x1x1x1" then return "Slash" end
-    if charName == "Slasher" then return "Slash" end
-    if charName == "Guest1337" then return "Punch" end
-    return "Slash"
-end
+
 local function AttackSurvivor()
     local currentTime = os.clock()
     if currentTime - lastAttackTime < Config.KillAllCooldown then return false end
+    
     local success = false
-    pcall(function()
-        local remoteEvent = ReplicatedStorage:FindFirstChild("Modules")
-        if remoteEvent then
-            local network = remoteEvent:FindFirstChild("Network")
-            if network then
-                local remote = network:FindFirstChild("RemoteEvent")
-                if remote then
-                    remote:FireServer("UseActorAbility", GetKillerAttackAbility())
-                    success = true
+    
+    if PcModeActive then
+        local function PressKey(key)
+            ContextActionService:BindAction("Attack_" .. key, function(actionName, inputState, inputObject)
+                if inputState == Enum.UserInputState.Begin then
+                    return Enum.ContextActionResult.Sink
+                end
+                return Enum.ContextActionResult.Pass
+            end, false, Enum.KeyCode[key])
+            task.wait(0.05)
+            ContextActionService:UnbindAction("Attack_" .. key)
+        end
+        
+        local attackKeys = {"R", "F", "E", "Q", "MouseButton1"}
+        for _, key in ipairs(attackKeys) do
+            pcall(function()
+                if key == "MouseButton1" then
+                    VirtualUser:CaptureController()
+                    VirtualUser:ClickButton1(Vector2.new())
+                else
+                    PressKey(key)
+                end
+                success = true
+            end)
+            if success then break end
+        end
+    end
+    
+    if not success then
+        pcall(function()
+            local remoteEvent = ReplicatedStorage:FindFirstChild("Modules")
+            if remoteEvent then
+                local network = remoteEvent:FindFirstChild("Network")
+                if network then
+                    local remote = network:FindFirstChild("RemoteEvent")
+                    if remote then
+                        remote:FireServer("UseActorAbility", GetKillerAttackAbility())
+                        success = true
+                    end
                 end
             end
-        end
-    end)
+        end)
+    end
+    
     if not success then
         pcall(function()
             VirtualUser:CaptureController()
@@ -156,39 +365,54 @@ local function AttackSurvivor()
             success = true
         end)
     end
+    
     if success then
         lastAttackTime = currentTime
         Stats.Kills = Stats.Kills + 1
     end
+    
     return success
 end
+
 local function TeleportBehindSurvivor(target)
     if not target or not target.RootPart then return false end
     if not LocalPlayer.Character then return false end
+    
     local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not rootPart then return false end
+    
     local lookVector = target.RootPart.CFrame.LookVector
     local behindPos = target.RootPart.Position - lookVector * 2.7 + Vector3.new(0, 1.5, 0)
+    
     rootPart.CFrame = CFrame.new(behindPos, target.RootPart.Position)
     return true
 end
+
 local function FlyToSurvivor(target)
     if not target or not target.RootPart then return false end
     if not LocalPlayer.Character then return false end
+    
     local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
     if not humanoid then return false end
+    
     local rootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not rootPart then return false end
+    
     local direction = (target.RootPart.Position - rootPart.Position).Unit
     local moveToPos = rootPart.Position + direction * 15
+    
     humanoid:MoveTo(moveToPos)
     return true
 end
+
 local function KillAllLoop()
     if killAllConnection then
         killAllConnection:Disconnect()
         killAllConnection = nil
     end
+    
+    ActivatePcMode()
+    
     killAllConnection = RunService.Heartbeat:Connect(function()
         if not Config.KillAll then
             if killAllConnection then
@@ -197,11 +421,13 @@ local function KillAllLoop()
             end
             return
         end
+        
         if not CheckIsKiller() then
             isKiller = false
             return
         end
         isKiller = true
+        
         if currentTarget then
             if not currentTarget.Model or not currentTarget.Model.Parent then
                 currentTarget = nil
@@ -209,6 +435,7 @@ local function KillAllLoop()
                 currentTarget = nil
             end
         end
+        
         if not currentTarget then
             local survivors = GetAliveSurvivors()
             if #survivors > 0 then
@@ -217,12 +444,14 @@ local function KillAllLoop()
                 return
             end
         end
+        
         if Config.KillAllTeleport then
             TeleportBehindSurvivor(currentTarget)
             task.wait(0.05)
         elseif Config.KillAllFly then
             FlyToSurvivor(currentTarget)
         end
+        
         if currentTarget and currentTarget.RootPart then
             local localChar = LocalPlayer.Character
             if localChar and localChar.PrimaryPart then
@@ -234,6 +463,7 @@ local function KillAllLoop()
         end
     end)
 end
+
 local function GetGenerators()
     local gens = {}
     local map = workspace:FindFirstChild("Map")
@@ -289,6 +519,7 @@ local function GetGenerators()
     end
     return gens
 end
+
 local function FixGenerator(gen)
     if not gen.Model or not gen.Model.Parent then return false end
     if gen.Progress.Value >= 100 then return true end
@@ -307,6 +538,7 @@ local function FixGenerator(gen)
     elapsed = os.clock()
     return true
 end
+
 local function AutoSwitchSurvivor()
     if not Config.AutoSwitchSurvivor then return end
     pcall(function()
@@ -345,6 +577,7 @@ local function AutoSwitchSurvivor()
         end
     end)
 end
+
 local function StartFarm()
     if isFarming then return end
     isFarming = true
@@ -353,6 +586,7 @@ local function StartFarm()
     if Config.AutoSwitchSurvivor then task.spawn(AutoSwitchSurvivor) end
     elapsed = os.clock()
     local stallCount = 0
+
     task.spawn(function()
         while isFarming do
             if not isWaiting then
@@ -364,12 +598,14 @@ local function StartFarm()
                 if stallCount >= 3 then
                     isFarming = false
                     task.wait(0.5)
+                    ServerHop()
                     return
                 end
             end
             task.wait(0.5)
         end
     end)
+
     local deathConnection = nil
     while isFarming do
         local character = LocalPlayer.Character
@@ -383,6 +619,7 @@ local function StartFarm()
                             if isFarming then
                                 isFarming = false
                                 task.wait(1)
+                                ServerHop()
                             end
                         end)
                     end
@@ -397,6 +634,7 @@ local function StartFarm()
                 if totalGens > 0 and doneGens >= Config.TargetGens then
                     isFarming = false
                     task.wait(0.5)
+                    ServerHop()
                     break
                 end
                 if #availableGens > 0 then
@@ -422,11 +660,13 @@ local function StartFarm()
     end
     if deathConnection then deathConnection:Disconnect() end
 end
+
 local hiddenGuis = {}
 local hiddenProperties = {}
 local stealthConnection = nil
 local walkSpeed = nil
 local maxSlopeAngle = nil
+
 function EnableStealth()
     Config.Stealth = true
     local character = LocalPlayer.Character
@@ -461,16 +701,17 @@ function EnableStealth()
         end
     end)
     pcall(function()
-        setsimulationradius(100)  -- ✅ ARREGLADO: antes era 0 (rompía todo)
+        setsimulationradius(0)
         if sethiddenproperty then
-            sethiddenproperty(LocalPlayer, "MaximumSimulationRadius", 100)  -- ✅ ARREGLADO
+            sethiddenproperty(LocalPlayer, "MaximumSimulationRadius", 0)
         end
     end)
     if stealthConnection then stealthConnection:Disconnect() end
     stealthConnection = RunService.Heartbeat:Connect(function()
-        if Config.Stealth then pcall(function() setsimulationradius(100) end) end  -- ✅ ARREGLADO
+        if Config.Stealth then pcall(function() setsimulationradius(0) end) end
     end)
 end
+
 function DisableStealth()
     Config.Stealth = false
     pcall(function()
@@ -501,18 +742,21 @@ function DisableStealth()
         stealthConnection = nil
     end
 end
+
 local function CreateUI()
-    if LocalPlayer.PlayerGui:FindFirstChild("AntSakenAutoFarm") then
-        LocalPlayer.PlayerGui.AntSakenAutoFarm:Destroy()
+    if LocalPlayer.PlayerGui:FindFirstChild("AutoFarmSakenUI") then
+        LocalPlayer.PlayerGui.AutoFarmSakenUI:Destroy()
     end
+
     local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "AntSakenAutoFarm"
+    ScreenGui.Name = "AutoFarmSakenUI"
     ScreenGui.ResetOnSpawn = false
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.Parent = LocalPlayer.PlayerGui
+
     local MainFrame = Instance.new("Frame")
-    MainFrame.Size = UDim2.new(0, 0, 0, 0)
-    MainFrame.Position = UDim2.new(0.5, -150, 0.5, -290)
+    MainFrame.Size = UDim2.new(0, 280, 0, 560)
+    MainFrame.Position = UDim2.new(0.5, -140, 0.5, -280)
     MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
     MainFrame.BackgroundTransparency = 0
     MainFrame.BorderSizePixel = 0
@@ -521,85 +765,58 @@ local function CreateUI()
     local Stroke = Instance.new("UIStroke", MainFrame)
     Stroke.Color = Color3.fromRGB(40, 40, 55)
     Stroke.Thickness = 1
-    local TitleBar = Instance.new("Frame")
-    TitleBar.Size = UDim2.new(1, 0, 0, 36)
-    TitleBar.Position = UDim2.new(0, 0, 0, 0)
-    TitleBar.BackgroundTransparency = 1
-    TitleBar.Parent = MainFrame
+
     local Title = Instance.new("TextLabel")
-    Title.Size = UDim2.new(0.7, 0, 1, 0)
-    Title.Position = UDim2.new(0, 12, 0, 0)
+    Title.Size = UDim2.new(1, 0, 0, 32)
+    Title.Position = UDim2.new(0, 0, 0, 4)
     Title.BackgroundTransparency = 1
-    Title.Text = "AntSaken-AutoFarm"
+    Title.Text = "AUTOFARM-SAKEN"
     Title.TextColor3 = Color3.fromRGB(230, 230, 240)
     Title.Font = Enum.Font.GothamBlack
-    Title.TextSize = 14
-    Title.TextXAlignment = Enum.TextXAlignment.Left
-    Title.Parent = TitleBar
-    local MinimizeBtn = Instance.new("TextButton")
-    MinimizeBtn.Size = UDim2.new(0, 0, 0, 0)
-    MinimizeBtn.Position = UDim2.new(1, -36, 0.5, -14)
-    MinimizeBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
-    MinimizeBtn.Text = "−"
-    MinimizeBtn.TextColor3 = Color3.fromRGB(200, 200, 210)
-    MinimizeBtn.Font = Enum.Font.GothamBold
-    MinimizeBtn.TextSize = 18
-    MinimizeBtn.BorderSizePixel = 0
-    MinimizeBtn.AutoButtonColor = false
-    MinimizeBtn.Parent = TitleBar
-    Instance.new("UICorner", MinimizeBtn).CornerRadius = UDim.new(1, 0)
-    local RestoreBtn = Instance.new("TextButton")
-    RestoreBtn.Size = UDim2.new(0, 0, 0, 0)
-    RestoreBtn.Position = MainFrame.Position
-    RestoreBtn.BackgroundColor3 = Color3.fromRGB(10, 10, 16)
-    RestoreBtn.Text = "+"
-    RestoreBtn.TextColor3 = Color3.fromRGB(200, 200, 210)
-    RestoreBtn.Font = Enum.Font.GothamBold
-    RestoreBtn.TextSize = 24
-    RestoreBtn.BorderSizePixel = 0
-    RestoreBtn.AutoButtonColor = false
-    RestoreBtn.Visible = false
-    RestoreBtn.Parent = ScreenGui
-    Instance.new("UICorner", RestoreBtn).CornerRadius = UDim.new(1, 0)
-    local RestoreStroke = Instance.new("UIStroke", RestoreBtn)
-    RestoreStroke.Color = Color3.fromRGB(40, 40, 55)
-    RestoreStroke.Thickness = 1
+    Title.TextSize = 15
+    Title.Parent = MainFrame
+
     local Credit = Instance.new("TextLabel")
     Credit.Size = UDim2.new(1, 0, 0, 18)
-    Credit.Position = UDim2.new(0, 0, 0, 36)
+    Credit.Position = UDim2.new(0, 0, 0, 34)
     Credit.BackgroundTransparency = 1
-    Credit.Text = "Made by Pichigdasos (Original: Ant W Ant)"
+    Credit.Text = "Made by Pichigdasos (Only this version, the original creator is Ant W Ant❤️‍🩹)"
     Credit.TextColor3 = Color3.fromRGB(180, 180, 200)
     Credit.Font = Enum.Font.Gotham
-    Credit.TextSize = 9
+    Credit.TextSize = 10
     Credit.TextTransparency = 0.4
     Credit.Parent = MainFrame
+
     local Sep = Instance.new("Frame")
     Sep.Size = UDim2.new(0.9, 0, 0, 1)
-    Sep.Position = UDim2.new(0.05, 0, 0, 56)
+    Sep.Position = UDim2.new(0.05, 0, 0, 54)
     Sep.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
     Sep.BorderSizePixel = 0
     Sep.Parent = MainFrame
+
     local Scroll = Instance.new("ScrollingFrame")
-    Scroll.Size = UDim2.new(1, -10, 1, -72)
-    Scroll.Position = UDim2.new(0, 5, 0, 60)
+    Scroll.Size = UDim2.new(1, -10, 1, -66)
+    Scroll.Position = UDim2.new(0, 5, 0, 58)
     Scroll.BackgroundTransparency = 1
-    Scroll.ScrollBarThickness = 3
+    Scroll.ScrollBarThickness = 2
     Scroll.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 65)
     Scroll.BorderSizePixel = 0
     Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
     Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
     Scroll.Parent = MainFrame
+
     local Layout = Instance.new("UIListLayout", Scroll)
-    Layout.Padding = UDim.new(0, 4)
+    Layout.Padding = UDim.new(0, 5)
     Layout.SortOrder = Enum.SortOrder.LayoutOrder
-    local function AddToggle(label, configKey, onChange, tooltip)
+
+    local function AddToggle(label, configKey, onChange)
         local frame = Instance.new("Frame")
         frame.Size = UDim2.new(1, 0, 0, 32)
         frame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
         frame.BorderSizePixel = 0
         frame.Parent = Scroll
         Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 6)
+
         local labelText = Instance.new("TextLabel")
         labelText.Size = UDim2.new(1, -60, 1, 0)
         labelText.Position = UDim2.new(0, 10, 0, 0)
@@ -610,6 +827,7 @@ local function CreateUI()
         labelText.TextSize = 10
         labelText.TextXAlignment = Enum.TextXAlignment.Left
         labelText.Parent = frame
+
         local toggleBtn = Instance.new("TextButton")
         toggleBtn.Size = UDim2.new(0, 44, 0, 20)
         toggleBtn.Position = UDim2.new(1, -52, 0.5, -10)
@@ -619,6 +837,7 @@ local function CreateUI()
         toggleBtn.AutoButtonColor = false
         toggleBtn.Parent = frame
         Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(1, 0)
+
         local knob = Instance.new("Frame")
         knob.Size = UDim2.new(0, 14, 0, 14)
         knob.Position = Config[configKey] and UDim2.new(1, -18, 0.5, -7) or UDim2.new(0, 3, 0.5, -7)
@@ -626,25 +845,7 @@ local function CreateUI()
         knob.BorderSizePixel = 0
         knob.Parent = toggleBtn
         Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
-        if tooltip then
-            local tooltipLabel = Instance.new("TextLabel")
-            tooltipLabel.Size = UDim2.new(1, 0, 0, 14)
-            tooltipLabel.Position = UDim2.new(0, 0, 1, 2)
-            tooltipLabel.BackgroundTransparency = 1
-            tooltipLabel.Text = tooltip
-            tooltipLabel.TextColor3 = Color3.fromRGB(100, 100, 120)
-            tooltipLabel.Font = Enum.Font.Gotham
-            tooltipLabel.TextSize = 7
-            tooltipLabel.TextXAlignment = Enum.TextXAlignment.Left
-            tooltipLabel.Visible = false
-            tooltipLabel.Parent = frame
-            frame.MouseEnter:Connect(function()
-                tooltipLabel.Visible = true
-            end)
-            frame.MouseLeave:Connect(function()
-                tooltipLabel.Visible = false
-            end)
-        end
+
         local function updateToggle(value)
             Config[configKey] = value
             TweenService:Create(toggleBtn, TweenInfo.new(0.15), {
@@ -659,9 +860,11 @@ local function CreateUI()
                 writefile("antsaken_config.json", HttpService:JSONEncode(Config))
             end)
         end
+
         toggleBtn.MouseButton1Click:Connect(function()
             updateToggle(not Config[configKey])
         end)
+
         toggleBtn.MouseEnter:Connect(function()
             TweenService:Create(toggleBtn, TweenInfo.new(0.1), {
                 BackgroundColor3 = Config[configKey] and Color3.fromRGB(120, 220, 255) or Color3.fromRGB(45, 45, 55)
@@ -672,9 +875,11 @@ local function CreateUI()
                 BackgroundColor3 = Config[configKey] and Color3.fromRGB(100, 200, 255) or Color3.fromRGB(35, 35, 45)
             }):Play()
         end)
+
         return updateToggle
     end
-    local function AddButton(label, callback, color, tooltip)
+
+    local function AddButton(label, callback, color)
         local btn = Instance.new("TextButton")
         btn.Size = UDim2.new(1, 0, 0, 28)
         btn.BackgroundColor3 = color or Color3.fromRGB(25, 25, 32)
@@ -686,25 +891,6 @@ local function CreateUI()
         btn.AutoButtonColor = false
         btn.Parent = Scroll
         Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
-        if tooltip then
-            local tooltipLabel = Instance.new("TextLabel")
-            tooltipLabel.Size = UDim2.new(1, 0, 0, 14)
-            tooltipLabel.Position = UDim2.new(0, 0, 1, 2)
-            tooltipLabel.BackgroundTransparency = 1
-            tooltipLabel.Text = tooltip
-            tooltipLabel.TextColor3 = Color3.fromRGB(100, 100, 120)
-            tooltipLabel.Font = Enum.Font.Gotham
-            tooltipLabel.TextSize = 7
-            tooltipLabel.TextXAlignment = Enum.TextXAlignment.Left
-            tooltipLabel.Visible = false
-            tooltipLabel.Parent = btn
-            btn.MouseEnter:Connect(function()
-                tooltipLabel.Visible = true
-            end)
-            btn.MouseLeave:Connect(function()
-                tooltipLabel.Visible = false
-            end)
-        end
         btn.MouseButton1Click:Connect(callback)
         btn.MouseEnter:Connect(function()
             TweenService:Create(btn, TweenInfo.new(0.15), {
@@ -717,6 +903,7 @@ local function CreateUI()
             }):Play()
         end)
     end
+
     local function AddSection(title)
         local frame = Instance.new("Frame")
         frame.Size = UDim2.new(1, 0, 0, 20)
@@ -732,20 +919,21 @@ local function CreateUI()
         label.TextXAlignment = Enum.TextXAlignment.Left
         label.Parent = frame
     end
+
     AddSection("SURVIVOR CONTROLS")
     AddToggle("Auto Farm", "AutoFarm", function(value)
-        if value then
-            if not isFarming then task.spawn(StartFarm) end
+        if value then            if not isFarming then task.spawn(StartFarm) end
         else
             isFarming = false
         end
-    end, "Automatically repairs generators")
+    end)
     AddToggle("Auto Survivor", "AutoSwitchSurvivor", function(value)
         if value then task.spawn(AutoSwitchSurvivor) end
-    end, "Switch to best survivor automatically")
+    end)
     AddToggle("Stealth Mode", "Stealth", function(value)
         if value then EnableStealth() else DisableStealth() end
-    end, "Hides UI elements and reduces visibility")
+    end)
+
     AddSection("KILL ALL")
     AddToggle("Kill All", "KillAll", function(value)
         if value then
@@ -761,9 +949,10 @@ local function CreateUI()
             end
             currentTarget = nil
         end
-    end, "Hunt and kill survivors automatically")
-    AddToggle("Teleport Mode", "KillAllTeleport", nil, "Teleport behind survivors")
-    AddToggle("Fly Mode", "KillAllFly", nil, "Fly towards survivors")
+    end)
+    AddToggle("Teleport Mode", "KillAllTeleport")
+    AddToggle("Fly Mode", "KillAllFly")
+
     AddSection("KILL ALL SETTINGS")
     
     local cooldownFrame = Instance.new("Frame")
@@ -771,6 +960,7 @@ local function CreateUI()
     cooldownFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
     cooldownFrame.Parent = Scroll
     Instance.new("UICorner", cooldownFrame).CornerRadius = UDim.new(0, 6)
+
     local cooldownLabel = Instance.new("TextLabel")
     cooldownLabel.Size = UDim2.new(0.6, 0, 1, 0)
     cooldownLabel.Position = UDim2.new(0, 10, 0, 0)
@@ -781,6 +971,7 @@ local function CreateUI()
     cooldownLabel.TextSize = 9
     cooldownLabel.TextXAlignment = Enum.TextXAlignment.Left
     cooldownLabel.Parent = cooldownFrame
+
     local cooldownValue = Instance.new("TextLabel")
     cooldownValue.Size = UDim2.new(0.3, 0, 1, 0)
     cooldownValue.Position = UDim2.new(0.7, 0, 0, 0)
@@ -791,11 +982,13 @@ local function CreateUI()
     cooldownValue.TextSize = 9
     cooldownValue.TextXAlignment = Enum.TextXAlignment.Right
     cooldownValue.Parent = cooldownFrame
+
     local rangeFrame = Instance.new("Frame")
     rangeFrame.Size = UDim2.new(1, 0, 0, 28)
     rangeFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
     rangeFrame.Parent = Scroll
     Instance.new("UICorner", rangeFrame).CornerRadius = UDim.new(0, 6)
+
     local rangeLabel = Instance.new("TextLabel")
     rangeLabel.Size = UDim2.new(0.6, 0, 1, 0)
     rangeLabel.Position = UDim2.new(0, 10, 0, 0)
@@ -806,37 +999,38 @@ local function CreateUI()
     rangeLabel.TextSize = 9
     rangeLabel.TextXAlignment = Enum.TextXAlignment.Left
     rangeLabel.Parent = rangeFrame
+
     local rangeValue = Instance.new("TextLabel")
     rangeValue.Size = UDim2.new(0.3, 0, 1, 0)
     rangeValue.Position = UDim2.new(0.7, 0, 0, 0)
     rangeValue.BackgroundTransparency = 1
-    rangeValue.Text = tostring(Config.AuraRange) .. " u"
+    rangeValue.Text = tostring(Config.AuraRange) .. "s"
     rangeValue.TextColor3 = Color3.fromRGB(255, 200, 80)
     rangeValue.Font = Enum.Font.GothamBold
     rangeValue.TextSize = 9
     rangeValue.TextXAlignment = Enum.TextXAlignment.Right
     rangeValue.Parent = rangeFrame
-    AddSection("UTILITIES")
-    AddToggle("Anti AFK Bypass", "AntiAfk", function(value)
-        if value then
-            AntiAfkLoop()
-        else
-            if antiAfkConnection then
-                antiAfkConnection:Disconnect()
-                antiAfkConnection = nil
-            end
-        end
-    end, "Moves character every 3 seconds to avoid AFK kick")
+
+    AddSection("SERVER SETTINGS")
+    AddToggle("Prefer New Server", "PreferNewServer")
+
     AddSection("ACTIONS")
+    AddButton("Hop Server", function()
+        isFarming = false
+        if killAllConnection then killAllConnection:Disconnect(); killAllConnection = nil end
+        task.wait(0.5)
+        ServerHop()
+    end)
+    AddButton("Activate PC Mode", function()
+        ActivatePcMode()
+    end, Color3.fromRGB(25, 45, 25))
     AddButton("Unload Script", function()
         isFarming = false
         if killAllConnection then killAllConnection:Disconnect(); killAllConnection = nil end
-        if antiAfkConnection then antiAfkConnection:Disconnect(); antiAfkConnection = nil end
         pcall(function() writefile("antsaken_config.json", HttpService:JSONEncode(Config)) end)
-        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1}):Play()
-        task.wait(0.35)
         ScreenGui:Destroy()
-    end, Color3.fromRGB(32, 18, 18), "Remove script from game")
+    end, Color3.fromRGB(32, 18, 18))
+
     AddSection("STATS")
     local statsLabel = Instance.new("TextLabel")
     statsLabel.Size = UDim2.new(1, 0, 0, 75)
@@ -852,25 +1046,38 @@ local function CreateUI()
     statsLabel.BackgroundTransparency = 0
     statsLabel.Padding = UDim.new(0, 8)
     statsLabel.Text = ""
+
     task.spawn(function()
-        while ScreenGui and ScreenGui.Parent do
+        while ScreenGui.Parent do
             local elapsed2 = os.clock() - Stats.StartTime
             local mins = math.floor(elapsed2 / 60)
             local secs = math.floor(elapsed2 % 60)
+            local serverQuality = "N/A"
+            if u13 then
+                local servers = GetAdvancedServers()
+                for _, s in ipairs(servers) do
+                    if s.id == u13 then
+                        serverQuality = tostring(s.quality) .. "%"
+                        break
+                    end
+                end
+            end
             statsLabel.Text = string.format(
-                "Gens: %d/%d | Kills: %d\nTime: %dm %ds\nKiller: %s | AntiAFK: %s\nStatus: %s",
+                "Gens: %d/%d | Kills: %d\nHops: %d | Time: %dm %ds\nKiller: %s | PC Mode: %s\nServer Quality: %s",
                 Stats.Fixed,
                 Config.TargetGens,
                 Stats.Kills,
+                Stats.Hops,
                 mins,
                 secs,
                 isKiller and "YES" or "NO",
-                Config.AntiAfk and "ON" or "OFF",
-                isFarming and "FARMING" or (Config.KillAll and isKiller and "KILLING" or "IDLE")
+                PcModeActive and "ON" or "OFF",
+                serverQuality
             )
             task.wait(0.5)
         end
     end)
+
     local statusFrame = Instance.new("Frame")
     statusFrame.Size = UDim2.new(1, 0, 0, 26)
     statusFrame.Position = UDim2.new(0, 0, 1, -26)
@@ -878,6 +1085,7 @@ local function CreateUI()
     statusFrame.BorderSizePixel = 0
     statusFrame.Parent = MainFrame
     Instance.new("UICorner", statusFrame).CornerRadius = UDim.new(0, 0, 12, 12)
+
     local dot = Instance.new("Frame")
     dot.Size = UDim2.new(0, 6, 0, 6)
     dot.Position = UDim2.new(0, 10, 0.5, -3)
@@ -885,6 +1093,7 @@ local function CreateUI()
     dot.BorderSizePixel = 0
     dot.Parent = statusFrame
     Instance.new("UICorner", dot).CornerRadius = UDim.new(1, 0)
+
     local statusText = Instance.new("TextLabel")
     statusText.Size = UDim2.new(1, -24, 1, 0)
     statusText.Position = UDim2.new(0, 22, 0, 0)
@@ -895,8 +1104,9 @@ local function CreateUI()
     statusText.TextSize = 8
     statusText.TextXAlignment = Enum.TextXAlignment.Left
     statusText.Parent = statusFrame
+
     task.spawn(function()
-        while ScreenGui and ScreenGui.Parent do
+        while ScreenGui.Parent do
             if Config.KillAll and isKiller then
                 statusText.Text = "KILLING"
                 statusText.TextColor3 = Color3.fromRGB(255, 50, 50)
@@ -913,128 +1123,56 @@ local function CreateUI()
             task.wait(0.3)
         end
     end)
-    local function MinimizeUI()
-        if isMinimized then return end
-        isMinimized = true
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1, TextTransparency = 1}):Play()
-        TweenService:Create(MainFrame, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1}):Play()
-        task.wait(0.25)
-        MainFrame.Visible = false
-        RestoreBtn.Visible = true
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 44, 0, 44), BackgroundTransparency = 0, TextTransparency = 0}):Play()
-    end
-    local function RestoreUI()
-        if not isMinimized then return end
-        isMinimized = false
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0), BackgroundTransparency = 1, TextTransparency = 1}):Play()
-        task.wait(0.2)
-        RestoreBtn.Visible = false
-        MainFrame.Visible = true
-        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 300, 0, 580), BackgroundTransparency = 0}):Play()
-        task.wait(0.15)
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 28, 0, 28), BackgroundTransparency = 0, TextTransparency = 0}):Play()
-    end
-    MinimizeBtn.MouseButton1Click:Connect(MinimizeUI)
-    RestoreBtn.MouseButton1Click:Connect(RestoreUI)
-    MinimizeBtn.MouseEnter:Connect(function()
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(50, 50, 65), Size = UDim2.new(0, 30, 0, 30)}):Play()
-    end)
-    MinimizeBtn.MouseLeave:Connect(function()
-        TweenService:Create(MinimizeBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(30, 30, 40), Size = UDim2.new(0, 28, 0, 28)}):Play()
-    end)
-    RestoreBtn.MouseEnter:Connect(function()
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(30, 30, 45), Size = UDim2.new(0, 48, 0, 48)}):Play()
-    end)
-    RestoreBtn.MouseLeave:Connect(function()
-        TweenService:Create(RestoreBtn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(10, 10, 16), Size = UDim2.new(0, 44, 0, 44)}):Play()
-    end)
+
     local dragging = false
     local dragStart = nil
     local startPos = nil
-    
-    TitleBar.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 and not isMinimized then
+    MainFrame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
             dragStart = input.Position
             startPos = MainFrame.Position
         end
     end)
-    
     UserInputService.InputChanged:Connect(function(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement and not isMinimized then
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement) then
             local delta = input.Position - dragStart
             MainFrame.Position = UDim2.new(0, startPos.X.Offset + delta.X, 0, startPos.Y.Offset + delta.Y)
-            RestoreBtn.Position = MainFrame.Position
-        end
-    end)
-    
-    UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = false
-        end
-    end)
-    local dragRestore = false
-    local dragStartR = nil
-    local startPosR = nil
-    RestoreBtn.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 and isMinimized then
-            dragRestore = true
-            dragStartR = input.Position
-            startPosR = RestoreBtn.Position
-        end
-    end)
-    UserInputService.InputChanged:Connect(function(input)
-        if dragRestore and input.UserInputType == Enum.UserInputType.MouseMovement and isMinimized then
-            local delta = input.Position - dragStartR
-            RestoreBtn.Position = UDim2.new(0, startPosR.X.Offset + delta.X, 0, startPosR.Y.Offset + delta.Y)
-            MainFrame.Position = RestoreBtn.Position
         end
     end)
     UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragRestore = false
-        end
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
     end)
+
     local uiVisible = true
     UserInputService.InputBegan:Connect(function(input, gameProcessed)
         if not gameProcessed and input.KeyCode == Config.ToggleKey then
             uiVisible = not uiVisible
-            if uiVisible then
-                if isMinimized then
-                    RestoreBtn.Visible = true
-                else
-                    MainFrame.Visible = true
-                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {BackgroundTransparency = 0}):Play()
-                end
-            else
-                if isMinimized then
-                    RestoreBtn.Visible = false
-                else
-                    TweenService:Create(MainFrame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-                    task.wait(0.3)
-                    MainFrame.Visible = false
-                end
-            end
+            MainFrame.Visible = uiVisible
         end
     end)
-    TweenService:Create(MainFrame, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 300, 0, 580), BackgroundTransparency = 0}):Play()
-    task.wait(0.25)
-    TweenService:Create(MinimizeBtn, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 28, 0, 28), BackgroundTransparency = 0, TextTransparency = 0}):Play()
 end
+
 pcall(function()
     LocalPlayer.Idled:Connect(function()
         VirtualUser:CaptureController()
         VirtualUser:ClickButton2(Vector2.new())
     end)
 end)
+
 LocalPlayer.CharacterAdded:Connect(function(character)
     if Config.Stealth then
         task.delay(1, function() EnableStealth() end)
     end
     isKiller = false
     currentTarget = nil
+    if Config.KillAll then
+        task.delay(1, function() ActivatePcMode() end)
+    end
 end)
+
 CreateUI()
+
 if Config.AutoFarm then
     task.spawn(function()
         local character = LocalPlayer.Character
@@ -1048,15 +1186,30 @@ if Config.AutoFarm then
         end
     end)
 end
+
 if Config.KillAll then
     task.spawn(function()
         task.wait(3)
+        ActivatePcMode()
         KillAllLoop()
     end)
 end
-if Config.AntiAfk then
-    task.spawn(function()
-        task.wait(3)
-        AntiAfkLoop()
+
+if game.PlaceId ~= 18687417158 then
+    pcall(function()
+        getgenv().AntsakenAutoExec = true
+        getgenv().AntsakenConfig = Config
+        getgenv().AntsakenStats = Stats
+    end)
+    task.delay(2, function()
+        TeleportService:Teleport(18687417158, LocalPlayer)
     end)
 end
+
+pcall(function()
+    if queue_on_teleport then
+        queue_on_teleport([[
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/tu-usuario/antsaken/main/loader.lua", true))()
+        ]])
+    end
+end)
